@@ -10,6 +10,7 @@ public class AudioManager : MonoBehaviour
     private float spb;
     float timer;
     float lastTimer;
+    public GameObject player;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +33,7 @@ public class AudioManager : MonoBehaviour
             timer = 0;
             lastTimer = 0;
             Debug.Log("BEAT");
+            player.GetComponent<PlayerController>().MovePlayer();
         }
 
         lastTimer = timer;
