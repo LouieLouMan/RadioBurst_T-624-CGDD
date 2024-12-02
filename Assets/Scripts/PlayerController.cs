@@ -21,10 +21,18 @@ public class PlayerController : MonoBehaviour
             if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) == 1f)
             {
                 movePoint.position += new Vector3(Input.GetAxisRaw("Horizontal"),0,0);
+                transform.eulerAngles = new Vector3(0.0f, 0.0f, -90f * Input.GetAxisRaw("Horizontal"));
             }
             if (Mathf.Abs(Input.GetAxisRaw("Vertical")) == 1f)
             {
                 movePoint.position += new Vector3(0,Input.GetAxisRaw("Vertical"),0);
+                if (Input.GetAxisRaw("Vertical") > 0){
+                    transform.eulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
+                }
+                else 
+                {
+                    transform.eulerAngles = new Vector3(0.0f, 0.0f, 180.0f);
+                }
             }
         }
     }
