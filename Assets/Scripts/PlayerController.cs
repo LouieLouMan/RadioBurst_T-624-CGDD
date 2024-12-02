@@ -51,9 +51,11 @@ public class PlayerController : MonoBehaviour
                 if (Mathf.Abs(movePoint.position.x) == levelBounds.x){
                     if (pointDirection.x > 0 && movePoint.position.x == levelBounds.x){
                         pointDirection.x = -pointDirection.x;
+                        lastHitKey = KeyCode.A;
                     }
                     if (pointDirection.x < 0 && movePoint.position.x == -levelBounds.x){
                         pointDirection.x = -pointDirection.x;
+                        lastHitKey = KeyCode.D;
                     }
                 }
                 movePoint.position += new Vector3(pointDirection.x,0,0);
@@ -64,9 +66,11 @@ public class PlayerController : MonoBehaviour
                 if (Mathf.Abs(movePoint.position.y) == levelBounds.y){
                     if (pointDirection.y > 0 && movePoint.position.y == levelBounds.y){
                         pointDirection.y = -pointDirection.y;
+                        lastHitKey = KeyCode.S;
                     }
                     if (pointDirection.y < 0 && movePoint.position.y == -levelBounds.y){
                         pointDirection.y = -pointDirection.y;
+                        lastHitKey = KeyCode.W;
                     }
                 }
                 movePoint.position += new Vector3(0,pointDirection.y,0);
