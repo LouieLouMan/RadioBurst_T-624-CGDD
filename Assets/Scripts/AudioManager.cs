@@ -29,6 +29,11 @@ public class AudioManager : MonoBehaviour
 
         timer += Time.deltaTime;
 
+        if (timer > spb/2 && lastTimer <= spb/2 && player.GetComponent<PlayerController>().doubleSpeed){
+            Debug.Log("HALF BEAT");
+            player.GetComponent<PlayerController>().MovePlayer();
+        }
+
         if (timer > spb && lastTimer <= spb){
             timer = 0;
             lastTimer = 0;

@@ -427,9 +427,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9af2f3969d73240abbbff0c9aad67081, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 25
   levelBounds: {x: 4, y: 4}
   movePoint: {fileID: 767304427}
+  doubleSpeed: 0
 --- !u!1 &2123659501
 GameObject:
   m_ObjectHideFlags: 0

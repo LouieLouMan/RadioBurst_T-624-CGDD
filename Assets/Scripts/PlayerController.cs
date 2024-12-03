@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public UnityEngine.Vector2 levelBounds;
     public Transform movePoint;
     private KeyCode lastHitKey;
+    public bool doubleSpeed = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +39,11 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.S))
         {
             lastHitKey = KeyCode.S;
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            doubleSpeed = !doubleSpeed;
         }
 
         Debug.Log(lastHitKey);
