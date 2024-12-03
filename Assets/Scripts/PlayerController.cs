@@ -45,8 +45,11 @@ public class PlayerController : MonoBehaviour
         {
             doubleSpeed = !doubleSpeed;
         }
+    }
 
-        Debug.Log(lastHitKey);
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log("Player collision");
     }
 
     public void MovePlayer()
@@ -91,7 +94,6 @@ public class PlayerController : MonoBehaviour
     }
 
     Vector2 createVector(){
-        Vector2 ret_vect = new Vector2(0,0);
         if (lastHitKey == KeyCode.A)
             return new Vector2(-1,0);
         if (lastHitKey == KeyCode.D)
