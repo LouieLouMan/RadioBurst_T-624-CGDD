@@ -3,12 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using System.IO;
+using TMPro;
 
 public class LaserShooter : MonoBehaviour
 {
     public enum EnemyType
     {
-        laser,
+        laser = 0,
     }
 
     [Serializable]
@@ -19,15 +21,39 @@ public class LaserShooter : MonoBehaviour
         public int y_pos;
         public int degrees;
         public EnemyType enemyType;
+
+        public Enemy(int beat, int x_pos, int y_pos, int degrees, EnemyType enemyType){
+            this.beat = beat;
+            this.x_pos = x_pos;
+            this.y_pos = y_pos;
+            this.degrees = degrees;
+            this.enemyType = enemyType;
+        }
     }
-    public Enemy[] enemies;
+    public List<Enemy> enemies;
     public GameObject laser;
     public int loopTime;
     private int lastBeat = -1;
     // Start is called before the first frame update
     void Start()
     {
-        
+        TextAsset csvFile = Resources.Load<TextAsset>("Levels/level_1");
+        var reader = new StringReader(csvFile.text);
+
+        while (reader.Peek() != -1)
+        {
+            var line = reader.ReadLine();
+            var values = line.Split(';');
+            enemies.Add(
+                new Enemy(
+                    int.Parse(values[0]), 
+                    int.Parse(values[1]), 
+                    int.Parse(values[2]),
+                    int.Parse(values[3]),
+                    (EnemyType)int.Parse(values[4])
+                )
+            );
+        }
     }
 
     // Update is called once per frame
@@ -41,7 +67,7 @@ public class LaserShooter : MonoBehaviour
     }
 
     void createEnemy(){
-        Enemy[] enemiesOnBeat = enemies.Where(e => e.beat == lastBeat % loopTime).ToArray();
+        var enemiesOnBeat = enemies.Where(e => e.beat == lastBeat % loopTime).ToArray();
         foreach (Enemy e in enemiesOnBeat)
         {
             Debug.Log(e.beat);
