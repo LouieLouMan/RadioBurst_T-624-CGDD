@@ -274,7 +274,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ba1534a242aa7f459343fbdce253582, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemies:
+  - beat: 1
+    x_pos: 1
+    y_pos: 0
+    degrees: 0
+    enemyType: 0
+  - beat: 3
+    x_pos: 0
+    y_pos: 1
+    degrees: 90
+    enemyType: 0
   laser: {fileID: 2301129396563069625, guid: 5ab9c17ff82bf58468e79aa8ef44685d, type: 3}
+  loopTime: 4
 --- !u!4 &1004614836
 Transform:
   m_ObjectHideFlags: 0
@@ -679,6 +691,8 @@ MonoBehaviour:
   song: {fileID: 0}
   bpm: 152
   player: {fileID: 1707666452}
+  currentBeat: -1
+  isPlaying: 0
 --- !u!4 &2123659504
 Transform:
   m_ObjectHideFlags: 0
