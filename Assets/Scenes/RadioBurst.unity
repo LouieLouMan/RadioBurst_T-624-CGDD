@@ -458,7 +458,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 0ca5d286ca3d547bea018fa584bedcb1, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 5d704ce3f5e3f42be92201dd197af737, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -557,7 +557,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   song: {fileID: 0}
-  bpm: 138
+  bpm: 152
   player: {fileID: 1707666452}
 --- !u!4 &2123659504
 Transform:
