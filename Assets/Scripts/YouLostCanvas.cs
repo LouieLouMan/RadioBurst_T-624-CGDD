@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using UnityEngine.EventSystems;
 public class MainCanvasScript : MonoBehaviour
 {
     GameObject youLostMenu;
+    
+    GameObject lastSelection;
 
     public int baseOpacity = 0;
 
@@ -14,7 +17,16 @@ public class MainCanvasScript : MonoBehaviour
     }
 
     void Update()
-    {
+    {   
+
+        if(EventSystem.current.currentSelectedGameObject == null)
+        {
+            EventSystem.current.SetSelectedGameObject(lastSelection);
+        }
+        else
+        {
+            lastSelection = EventSystem.current.currentSelectedGameObject;
+        }
         if (Input.GetKey(KeyCode.Escape))
         {
             PauseGame();
@@ -51,7 +63,6 @@ public class MainCanvasScript : MonoBehaviour
     // Called when we click the "Quit" button.
     public void OnQuitButton ()
     {   
-        ResumeGame();
         Application.Quit();
     }
 
