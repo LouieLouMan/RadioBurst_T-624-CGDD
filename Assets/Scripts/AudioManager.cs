@@ -10,6 +10,8 @@ public class AudioManager : MonoBehaviour
     private float spb;
     float timer;
     float lastTimer;
+    float beatTimer;
+    float lastBeatTimer;
     public GameObject player;
     public int currentBeat;
     public bool isPlaying = false;
@@ -35,14 +37,24 @@ public class AudioManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space)){
             timer = 0;
             lastTimer = 0;
-            currentBeat = 0;
+            currentBeat = 1;
+            beatTimer = 0;
+            lastBeatTimer = 0;
             song.Play();
             isPlaying = true;
         }
 
         timer += Time.deltaTime;
+        beatTimer += Time.deltaTime;
 
         if (isPlaying){
+            if (beatTimer > spb/4 && lastBeatTimer <= spb/4)
+            {
+                beatTimer = 0;
+                lastBeatTimer = 0;
+                currentBeat++;
+            }
+
             if (timer > spb/2 && lastTimer <= spb/2 && player.GetComponent<PlayerController>().doubleSpeed){
                 player.GetComponent<PlayerController>().MovePlayer();
             }
@@ -51,10 +63,10 @@ public class AudioManager : MonoBehaviour
                 timer = 0;
                 lastTimer = 0;
                 player.GetComponent<PlayerController>().MovePlayer();
-                currentBeat++;
             }
 
             lastTimer = timer;
+            lastBeatTimer = beatTimer;
         }
     }
 }

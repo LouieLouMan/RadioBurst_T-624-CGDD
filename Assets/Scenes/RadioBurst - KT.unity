@@ -276,7 +276,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemies: []
   laser: {fileID: 2301129396563069625, guid: 5ab9c17ff82bf58468e79aa8ef44685d, type: 3}
-  loopTime: 18
+  loopTime: 100
 --- !u!4 &1004614836
 Transform:
   m_ObjectHideFlags: 0
