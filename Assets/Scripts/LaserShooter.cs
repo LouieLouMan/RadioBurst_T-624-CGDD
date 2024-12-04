@@ -11,6 +11,7 @@ public class LaserShooter : MonoBehaviour
     public enum EnemyType
     {
         laser = 0,
+        bullet = 1,
     }
 
     [Serializable]
@@ -32,6 +33,7 @@ public class LaserShooter : MonoBehaviour
     }
     public List<Enemy> enemies;
     public GameObject laser;
+    public GameObject bullet;
     public int loopTime;
     private int lastBeat = -1;
     // Start is called before the first frame update
@@ -76,6 +78,10 @@ public class LaserShooter : MonoBehaviour
                 int pos = isHorizontal ? e.y_pos : e.x_pos;
                 spawnLaserAt(pos, isHorizontal);
             }
+            if (e.enemyType == EnemyType.bullet)
+            {
+                spawnBulletAt(e.x_pos, e.y_pos, e.degrees);
+            }
         }
 
     }
@@ -95,5 +101,13 @@ public class LaserShooter : MonoBehaviour
         Quaternion rotation = horizontal ? Quaternion.Euler(0, 0, 90) : Quaternion.identity;
         GameObject laserShot = Instantiate(laser, laserPosition, rotation);
         Destroy(laserShot, AudioManager.instance.spb * 4);
+    }
+
+    void spawnBulletAt(int x_pos, int y_pos, int degrees)
+    {
+        Vector3 bulletPosition = new Vector3(x_pos, y_pos, 0);
+        GameObject bulletShot = Instantiate(bullet, bulletPosition, Quaternion.identity);
+        bulletShot.GetComponent<Bullet>().direction = Quaternion.Euler(0f,0f,degrees) * bulletShot.GetComponent<Bullet>().direction;
+        Destroy(bulletShot, 15);
     }
 }
