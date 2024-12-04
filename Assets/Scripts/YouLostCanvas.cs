@@ -1,39 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using UnityEngine;
 using Unity.VisualScripting;
 public class MainCanvasScript : MonoBehaviour
 {
-    GameObject child;
+    GameObject youLostMenu;
 
-    public int keyDownDuration = 300;
-    int keyDownCount = 0;
+    public int baseOpacity = 0;
 
     void Start()
     {
-        child = this.transform.GetChild(0).gameObject;
+        youLostMenu = this.transform.GetChild(0).gameObject;
     }
 
     void Update()
     {
         if (Input.GetKey(KeyCode.Escape))
         {
-            Debug.Log(keyDownCount);
-            // Toggle pause state on Escape key press
-            if (keyDownCount >= keyDownDuration)
-            {
-                PauseGame();
-
-            }
-            else
-            {
-                keyDownCount++;
-            }
-        }
-        else
-        {
-            keyDownCount = 0;
+            PauseGame();
         }
     }
 
@@ -42,7 +28,7 @@ public class MainCanvasScript : MonoBehaviour
         // Set Time.timeScale to 0 to pause gameplay
         Time.timeScale = 0;
         // Make PauseMenu panel visible (activate its gameObject)
-        child.gameObject.SetActive(true);
+        youLostMenu.gameObject.SetActive(true);
     }
 
     void ResumeGame()
@@ -50,14 +36,14 @@ public class MainCanvasScript : MonoBehaviour
         // Set Time.timeScale back to 1 to resume gameplay
         Time.timeScale = 1;
         // Hide PauseMenu panel (deactivate its gameObject)
-        child.gameObject.SetActive(false);
+        youLostMenu.gameObject.SetActive(false);
     }
     
     public void RetryGame()
     {
         ResumeGame();
-        //TODO impliment retry game
-        Debug.Log("NOT YET IMPLIMENTED, CANNOT RETRY GAME.");
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
     }
     public void MainMenu ()
     {   
