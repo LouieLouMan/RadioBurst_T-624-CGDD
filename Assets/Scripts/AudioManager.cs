@@ -7,7 +7,7 @@ public class AudioManager : MonoBehaviour
 
     public AudioSource song;
     public float bpm;
-    private float spb;
+    public float spb;
     float timer;
     float lastTimer;
     float beatTimer;

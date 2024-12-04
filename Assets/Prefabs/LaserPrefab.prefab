@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 615744861049947371}
   - component: {fileID: -3897864116438328499}
-  - component: {fileID: -6748008491406089399}
   - component: {fileID: 1835440646732698896}
+  - component: {fileID: 5155967229280135373}
   m_Layer: 0
   m_Name: LaserPrefab
   m_TagString: Untagged
@@ -86,14 +86,30 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &-6748008491406089399
-BoxCollider2D:
+--- !u!114 &1835440646732698896
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2301129396563069625}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8b1102d886d9304aad06dc84ec6f173, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 0}
+  phase1: {fileID: 1393371446, guid: ed61c27440c8af8419f673946829dc74, type: 3}
+  phase2: {fileID: -1767078865, guid: ed61c27440c8af8419f673946829dc74, type: 3}
+  phaseDamage: {fileID: 261088000, guid: ed61c27440c8af8419f673946829dc74, type: 3}
+--- !u!61 &5155967229280135373
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2301129396563069625}
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -131,16 +147,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.15, y: 1.61}
   m_EdgeRadius: 0
---- !u!114 &1835440646732698896
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2301129396563069625}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8b1102d886d9304aad06dc84ec6f173, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  laser: {fileID: 0}

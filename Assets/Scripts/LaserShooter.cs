@@ -70,7 +70,6 @@ public class LaserShooter : MonoBehaviour
         var enemiesOnBeat = enemies.Where(e => e.beat == lastBeat % loopTime).ToArray();
         foreach (Enemy e in enemiesOnBeat)
         {
-            Debug.Log(e.beat);
             if (e.enemyType == EnemyType.laser)
             {
                 bool isHorizontal = e.degrees == 90;
@@ -95,6 +94,6 @@ public class LaserShooter : MonoBehaviour
         }
         Quaternion rotation = horizontal ? Quaternion.Euler(0, 0, 90) : Quaternion.identity;
         GameObject laserShot = Instantiate(laser, laserPosition, rotation);
-        Destroy(laserShot, 1);
+        Destroy(laserShot, AudioManager.instance.spb * 4);
     }
 }
