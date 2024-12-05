@@ -1910,7 +1910,7 @@ GameObject:
   - component: {fileID: 1707666457}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: ShadowLightning
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2002,6 +2002,7 @@ MonoBehaviour:
   playerSprite: {fileID: 1707666453}
   hitOnBeat: 0
   doubleSpeed: 0
+  INVINCIBLE_FRAMES: 10
   isInvincible: 0
 --- !u!61 &1707666456
 BoxCollider2D:

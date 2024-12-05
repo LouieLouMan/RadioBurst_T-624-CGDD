@@ -10,15 +10,19 @@ public class PlayerController : MonoBehaviour
     private KeyCode lastHitKey;
     public Collider2D playerCollider; 
     public SpriteRenderer playerSprite;
+    public AudioSource dmg;
     public float hitOnBeat;
     public bool doubleSpeed = false;
-
+    public int INVINCIBLE_FRAMES;
     public bool isInvincible = false;
+
     // Start is called before the first frame update
     void Start()
     {
         movePoint.parent = null;
         lastHitKey = KeyCode.W;
+        dmg = GetComponent<AudioSource>();
+        
     }
 
     // Update is called once per frame
@@ -58,6 +62,8 @@ public class PlayerController : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         hitOnBeat = AudioManager.instance.currentBeat; 
+        dmg.Play();
+        
         playerCollider.enabled = false;
         playerSprite.enabled = false;
         isInvincible = true;
@@ -65,10 +71,15 @@ public class PlayerController : MonoBehaviour
 
     void PlayerContinuousCollisions(){
 
-        if(AudioManager.instance.currentBeat < hitOnBeat+10){
+        if(AudioManager.instance.currentBeat < hitOnBeat+INVINCIBLE_FRAMES){
+            if(AudioManager.instance.currentBeat % 2 == 0){
+                playerSprite.enabled = true;
+            }else {
+                playerSprite.enabled = false;
+            }
         }
 
-        if (AudioManager.instance.currentBeat >= hitOnBeat+10){
+        if (AudioManager.instance.currentBeat >= hitOnBeat+INVINCIBLE_FRAMES){
             playerCollider.enabled = true;
             playerSprite.enabled = true;
             isInvincible = false;
