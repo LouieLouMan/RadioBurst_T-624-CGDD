@@ -9,5 +9,6 @@ public class GameControllerScript : MonoBehaviour
     void Awake()
     {
         instance = this;
+        //Application.targetFrameRate = 120;
     }
 }
