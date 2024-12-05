@@ -101,7 +101,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   phase1: {fileID: 141707642, guid: fc26bb702cf3c403ca44f5dfd77fd5c9, type: 3}
   phase2: {fileID: 925045253, guid: fc26bb702cf3c403ca44f5dfd77fd5c9, type: 3}
-  phaseDamage: {fileID: 1040763901, guid: 32ee9351ce0d040b796f542d5dd9a5af, type: 3}
+  phaseDamage: {fileID: -50439380, guid: fc26bb702cf3c403ca44f5dfd77fd5c9, type: 3}
 --- !u!61 &5155967229280135373
 BoxCollider2D:
   m_ObjectHideFlags: 0
