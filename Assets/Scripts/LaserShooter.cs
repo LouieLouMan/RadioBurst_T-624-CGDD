@@ -39,7 +39,7 @@ public class LaserShooter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        TextAsset csvFile = Resources.Load<TextAsset>("Levels/level_1");
+        TextAsset csvFile = Resources.Load<TextAsset>("Levels/level_bok");
         var reader = new StringReader(csvFile.text);
 
         while (reader.Peek() != -1)

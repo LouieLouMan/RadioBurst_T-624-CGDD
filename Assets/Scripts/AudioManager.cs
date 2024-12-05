@@ -28,6 +28,7 @@ public class AudioManager : MonoBehaviour
     {
         song = GetComponent<AudioSource>();
         spb = 60f/bpm;
+        GetComponent<AudioSource>().clip.LoadAudioData();
 
     }
 
@@ -53,6 +54,7 @@ public class AudioManager : MonoBehaviour
                 beatTimer = 0;
                 lastBeatTimer = 0;
                 currentBeat++;
+                Debug.Log(currentBeat);
             }
 
             if (timer > spb/2 && lastTimer <= spb/2 && player.GetComponent<PlayerController>().doubleSpeed){
