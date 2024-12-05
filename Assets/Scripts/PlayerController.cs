@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed;
+    public int movementScoreGain = 10;
+    public int collisionScoreLoss = 100;
     public UnityEngine.Vector2 levelBounds;
     public Transform movePoint;
     private KeyCode lastHitKey;
@@ -85,10 +88,12 @@ public class PlayerController : MonoBehaviour
             isInvincible = false;
         }
 
+        GameControllerScript.instance.score -= math.min(GameControllerScript.instance.score, collisionScoreLoss);
     }
 
     public void MovePlayer()
     {
+        GameControllerScript.instance.score += 10;
         Vector2 pointDirection = createVector();
         if (Mathf.Abs(pointDirection.x) == 1f)
             {
