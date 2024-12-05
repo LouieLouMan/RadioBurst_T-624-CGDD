@@ -11,17 +11,29 @@ public class PlayerController : MonoBehaviour
     public UnityEngine.Vector2 levelBounds;
     public Transform movePoint;
     private KeyCode lastHitKey;
+    public Collider2D playerCollider; 
+    public SpriteRenderer playerSprite;
+    public AudioSource dmg;
+    public float hitOnBeat;
     public bool doubleSpeed = false;
+    public int INVINCIBLE_FRAMES;
+    public bool isInvincible = false;
+
     // Start is called before the first frame update
     void Start()
     {
         movePoint.parent = null;
         lastHitKey = KeyCode.W;
+        dmg = GetComponent<AudioSource>();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(isInvincible == true){
+            PlayerContinuousCollisions();
+        }
         transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed * Time.deltaTime);
 
         if (Input.GetKeyDown(KeyCode.A))
@@ -52,8 +64,31 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        hitOnBeat = AudioManager.instance.currentBeat; 
+        dmg.Play();
+        
+        playerCollider.enabled = false;
+        playerSprite.enabled = false;
+        isInvincible = true;
+    }
+
+    void PlayerContinuousCollisions(){
+
+        if(AudioManager.instance.currentBeat < hitOnBeat+INVINCIBLE_FRAMES){
+            if(AudioManager.instance.currentBeat % 2 == 0){
+                playerSprite.enabled = true;
+            }else {
+                playerSprite.enabled = false;
+            }
+        }
+
+        if (AudioManager.instance.currentBeat >= hitOnBeat+INVINCIBLE_FRAMES){
+            playerCollider.enabled = true;
+            playerSprite.enabled = true;
+            isInvincible = false;
+        }
+
         GameControllerScript.instance.score -= math.min(GameControllerScript.instance.score, collisionScoreLoss);
-        Debug.Log("Player collision");
     }
 
     public void MovePlayer()

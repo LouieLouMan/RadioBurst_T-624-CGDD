@@ -53,7 +53,7 @@ public class GameOverCanvas : MonoBehaviour
     {
         ResumeGame();
         Scene scene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(scene.name);
+        SceneManager.LoadScene(scene.name, LoadSceneMode.Single);
     }
     public void MainMenu ()
     {   
