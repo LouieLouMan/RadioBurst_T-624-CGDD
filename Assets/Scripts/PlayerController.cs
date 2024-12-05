@@ -53,14 +53,12 @@ public class PlayerController : MonoBehaviour
         {
             lastHitKey = KeyCode.W;
             transform.eulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
-
         }
 
         if (Input.GetKeyDown(KeyCode.S))
         {
             lastHitKey = KeyCode.S;
             transform.eulerAngles = new Vector3(0.0f, 0.0f, 180f);
-
         }
 
         if (Input.GetKeyDown(KeyCode.LeftShift))
@@ -114,8 +112,9 @@ public class PlayerController : MonoBehaviour
                     }
                 }
                 movePoint.position += new Vector3(pointDirection.x,0,0);
+                transform.eulerAngles = new Vector3(0.0f, 0.0f, -90f * pointDirection.x);
             }
-        if (Mathf.Abs(pointDirection.y) == 1f)
+            if (Mathf.Abs(pointDirection.y) == 1f)
             {
                 if (Mathf.Abs(movePoint.position.y) == levelBounds.y){
                     if (pointDirection.y > 0 && movePoint.position.y == levelBounds.y){
@@ -128,6 +127,13 @@ public class PlayerController : MonoBehaviour
                     }
                 }
                 movePoint.position += new Vector3(0,pointDirection.y,0);
+                if (pointDirection.y > 0){
+                    transform.eulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
+                }
+                else 
+                {
+                    transform.eulerAngles = new Vector3(0.0f, 0.0f, 180.0f);
+                }
             }
     }
 
