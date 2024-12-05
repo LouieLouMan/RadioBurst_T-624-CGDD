@@ -70,6 +70,7 @@ public class PlayerController : MonoBehaviour
         playerCollider.enabled = false;
         playerSprite.enabled = false;
         isInvincible = true;
+        GameControllerScript.instance.score -= math.min(GameControllerScript.instance.score, collisionScoreLoss);
     }
 
     void PlayerContinuousCollisions(){
@@ -87,8 +88,6 @@ public class PlayerController : MonoBehaviour
             playerSprite.enabled = true;
             isInvincible = false;
         }
-
-        GameControllerScript.instance.score -= math.min(GameControllerScript.instance.score, collisionScoreLoss);
     }
 
     public void MovePlayer()
