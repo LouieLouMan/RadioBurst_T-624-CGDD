@@ -39,21 +39,26 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.A))
         {
             lastHitKey = KeyCode.A;
+            transform.eulerAngles = new Vector3(0.0f, 0.0f, 90f);
         }
 
         if (Input.GetKeyDown(KeyCode.D))
         {
             lastHitKey = KeyCode.D;
+            transform.eulerAngles = new Vector3(0.0f, 0.0f, -90f);
+
         }
  
         if (Input.GetKeyDown(KeyCode.W))
         {
             lastHitKey = KeyCode.W;
+            transform.eulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
         }
 
         if (Input.GetKeyDown(KeyCode.S))
         {
             lastHitKey = KeyCode.S;
+            transform.eulerAngles = new Vector3(0.0f, 0.0f, 180f);
         }
 
         if (Input.GetKeyDown(KeyCode.LeftShift))
