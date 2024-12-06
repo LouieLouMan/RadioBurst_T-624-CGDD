@@ -53,6 +53,7 @@ public class AudioManager : MonoBehaviour
             if (currentBeat >= 900)
             {
                 GameOverCanvas.instance.PauseGame();
+                isPlaying = false;
             }
 
             if (beatTimer > spb/4 && lastBeatTimer <= spb/4)
