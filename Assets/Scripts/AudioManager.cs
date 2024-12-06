@@ -17,6 +17,8 @@ public class AudioManager : MonoBehaviour
     public bool isPlaying = false;
     public static AudioManager instance;
 
+    public GameObject pressSpaceToStartTxt;
+
     // Start is called before the first frame update
     
     void Awake()
@@ -35,7 +37,7 @@ public class AudioManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)){
+        if (Input.GetKeyDown(KeyCode.Space) && isPlaying == false){
             timer = 0;
             lastTimer = 0;
             currentBeat = 1;
@@ -43,6 +45,7 @@ public class AudioManager : MonoBehaviour
             lastBeatTimer = 0;
             song.Play();
             isPlaying = true;
+            pressSpaceToStartTxt.gameObject.SetActive(false);
         }
 
         timer += Time.deltaTime;
