@@ -99,9 +99,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 0}
-  phase1: {fileID: 1393371446, guid: ed61c27440c8af8419f673946829dc74, type: 3}
-  phase2: {fileID: -1767078865, guid: ed61c27440c8af8419f673946829dc74, type: 3}
-  phaseDamage: {fileID: 261088000, guid: ed61c27440c8af8419f673946829dc74, type: 3}
+  phase1: {fileID: -1174396404, guid: fc26bb702cf3c403ca44f5dfd77fd5c9, type: 3}
+  phase2: {fileID: -780214955, guid: fc26bb702cf3c403ca44f5dfd77fd5c9, type: 3}
+  phaseDamage: {fileID: -376623956, guid: fc26bb702cf3c403ca44f5dfd77fd5c9, type: 3}
 --- !u!61 &5155967229280135373
 BoxCollider2D:
   m_ObjectHideFlags: 0
