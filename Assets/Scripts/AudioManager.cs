@@ -52,6 +52,11 @@ public class AudioManager : MonoBehaviour
         beatTimer += Time.deltaTime;
 
         if (isPlaying){
+            if (currentBeat >= 900)
+            {
+                GameOverCanvas.instance.PauseGame();
+            }
+
             if (beatTimer > spb/4 && lastBeatTimer <= spb/4)
             {
                 beatTimer = 0;

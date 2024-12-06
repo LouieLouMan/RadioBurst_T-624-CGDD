@@ -5,12 +5,17 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 public class GameOverCanvas : MonoBehaviour
 {
+    public static GameOverCanvas instance;
     GameObject youLostMenu;
     
     GameObject lastSelection;
 
     public int baseOpacity = 0;
 
+    void Awake()
+    {
+        instance = this;
+    }
     void Start()
     {
         youLostMenu = this.transform.GetChild(0).gameObject;
@@ -33,7 +38,7 @@ public class GameOverCanvas : MonoBehaviour
         }
     }
 
-    void PauseGame()
+    public void PauseGame()
     {
         // Set Time.timeScale to 0 to pause gameplay
         Time.timeScale = 0;
