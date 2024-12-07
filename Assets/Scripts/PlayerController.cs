@@ -1,5 +1,6 @@
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class PlayerController : MonoBehaviour
 {
@@ -16,6 +17,13 @@ public class PlayerController : MonoBehaviour
     public bool doubleSpeed = false;
     public int INVINCIBLE_FRAMES;
     public bool isInvincible = false;
+    public AudioMixer gameAudioMixer;
+    public float muffledFrequency = 500f;  // Frequency for muffling
+    public float normalFrequency = 22000f; // Normal frequency
+    public float muffledDuration = 1.5f;   // Duration of muffling effect
+    public float warpedPitch = 0.8f;       // Pitch for warp effect
+    public float normalPitch = 1.0f;       // Normal pitch
+
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +31,7 @@ public class PlayerController : MonoBehaviour
         movePoint.parent = null;
         lastHitKey = KeyCode.W;
         dmg = GetComponent<AudioSource>();
+        ResetAudioEffects();
         
     }
 
@@ -37,32 +46,27 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.A))
         {
             lastHitKey = KeyCode.A;
-            transform.eulerAngles = new Vector3(0.0f, 0.0f, 90f);
         }
 
         if (Input.GetKeyDown(KeyCode.D))
         {
             lastHitKey = KeyCode.D;
-            transform.eulerAngles = new Vector3(0.0f, 0.0f, -90f);
-
         }
  
         if (Input.GetKeyDown(KeyCode.W))
         {
             lastHitKey = KeyCode.W;
-            transform.eulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
         }
 
         if (Input.GetKeyDown(KeyCode.S))
         {
             lastHitKey = KeyCode.S;
-            transform.eulerAngles = new Vector3(0.0f, 0.0f, 180f);
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            doubleSpeed = !doubleSpeed;
-        }
+        // if (Input.GetKeyDown(KeyCode.LeftShift))
+        // {
+        //     doubleSpeed = !doubleSpeed;
+        // }
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -74,6 +78,9 @@ public class PlayerController : MonoBehaviour
         playerSprite.enabled = false;
         isInvincible = true;
         GameControllerScript.instance.score -= math.min(GameControllerScript.instance.score, collisionScoreLoss);
+
+        MuffleAudio();
+        Invoke(nameof(ResetAudioEffects), muffledDuration);
     }
 
     void PlayerContinuousCollisions(){
@@ -146,6 +153,23 @@ public class PlayerController : MonoBehaviour
             return new Vector2(0,-1);
         
         return new Vector2(0,0);
+    }
+    void MuffleAudio()
+    {
+        // Lower the cutoff frequency to muffle
+        gameAudioMixer.SetFloat("LowPassFreq", muffledFrequency);
+        
+        // Lower the pitch to warp
+        gameAudioMixer.SetFloat("MasterPitch", warpedPitch);
+    }
+
+    void ResetAudioEffects()
+    {
+        // Restore the normal cutoff frequency
+        gameAudioMixer.SetFloat("LowPassFreq", normalFrequency);
+        
+        // Restore the normal pitch
+        gameAudioMixer.SetFloat("MasterPitch", normalPitch);
     }
 }
 
