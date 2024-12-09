@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public Transform movePoint;
     private KeyCode lastHitKey;
     public Collider2D playerCollider; 
+    public ParticleSystem playerParticle;
     public SpriteRenderer playerSprite;
     public AudioSource dmg;
     public float hitOnBeat;
@@ -30,6 +31,7 @@ public class PlayerController : MonoBehaviour
     {
         movePoint.parent = null;
         lastHitKey = KeyCode.W;
+        playerParticle = GetComponent<ParticleSystem>();
         dmg = GetComponent<AudioSource>();
         ResetAudioEffects();
         
@@ -73,7 +75,7 @@ public class PlayerController : MonoBehaviour
     {
         hitOnBeat = AudioManager.instance.currentBeat; 
         dmg.Play();
-        
+        playerParticle.Play();
         playerCollider.enabled = false;
         playerSprite.enabled = false;
         isInvincible = true;
