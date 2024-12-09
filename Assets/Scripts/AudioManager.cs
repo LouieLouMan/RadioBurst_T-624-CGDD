@@ -1,5 +1,8 @@
+using TMPro;
 using Unity.Mathematics;
+using UnityEditor.IMGUI.Controls;
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
 
 public class AudioManager : MonoBehaviour
 {
@@ -21,7 +24,9 @@ public class AudioManager : MonoBehaviour
     public GameObject pressSpaceToStartTxt;
 
     private Color black = Color.black;
-    private Color crimson = new Color(0.25f, 0f, 0f, 0.2f);
+    private Color crimson = new(70f/255f, 0, 70f/255f, 0.75f);
+    private bool movedOnBeat = false;
+    private float graceCooldown;
 
     // Start is called before the first frame update
     
@@ -29,13 +34,13 @@ public class AudioManager : MonoBehaviour
     {
         instance = this;
     }
-    
+
     void Start()
     {
         song = GetComponent<AudioSource>();
         spb = 60f/bpm;
         GetComponent<AudioSource>().clip.LoadAudioData();
-
+        graceCooldown = 0f;
     }
 
     // Update is called once per frame
@@ -54,6 +59,7 @@ public class AudioManager : MonoBehaviour
 
         timer += Time.deltaTime;
         beatTimer += Time.deltaTime;
+        graceCooldown += Time.deltaTime;
 
         if (isPlaying){
             if (currentBeat >= 900)
@@ -62,6 +68,7 @@ public class AudioManager : MonoBehaviour
                 isPlaying = false;
             }
 
+
             if (beatTimer > spb/4 && lastBeatTimer <= spb/4)
             {
                 beatTimer = 0;
@@ -69,21 +76,24 @@ public class AudioManager : MonoBehaviour
                 currentBeat++;
             }
 
-            // if (timer > spb/2 && lastTimer <= spb/2 && player.GetComponent<PlayerController>().doubleSpeed){
-            //     player.GetComponent<PlayerController>().MovePlayer();
-            // }
-
             if (timer > spb && lastTimer <= spb)
             {
                 timer %= spb;
                 Camera.main.backgroundColor = cameraOdd ? crimson : black;
                 cameraOdd = !cameraOdd;
             }
-            
+
+            if (graceCooldown > 0.25f)
+            {
+                movedOnBeat = false;
+            }
+
             if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D))
             {
-                if (IsInputOnBeat())
+                if (IsInputOnBeat() && !movedOnBeat)
                 {
+                    movedOnBeat = true;
+                    graceCooldown = 0;
                     player.GetComponent<PlayerController>().MovePlayer();
                     Debug.Log("Input was on beat!");
                 }
@@ -100,7 +110,7 @@ public class AudioManager : MonoBehaviour
     bool IsInputOnBeat()
     {
         float timeSinceLastBeat = Mathf.Abs(timer - spb);
-        Debug.Log(timeSinceLastBeat);
+        Debug.Log(timeSinceLastBeat + " " + spb + " <- wtf");
         return timeSinceLastBeat <= inputTolerance || spb - timeSinceLastBeat <= inputTolerance;
     }
 }

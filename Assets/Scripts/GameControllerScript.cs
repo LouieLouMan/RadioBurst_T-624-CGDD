@@ -7,6 +7,7 @@ public class GameControllerScript : MonoBehaviour
     void Awake()
     {
         instance = this;
-        //Application.targetFrameRate = 120;
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 128; // <- waow
     }
 }
