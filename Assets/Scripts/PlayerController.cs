@@ -78,6 +78,7 @@ public class PlayerController : MonoBehaviour
         playerSprite.enabled = false;
         isInvincible = true;
         GameControllerScript.instance.score -= math.min(GameControllerScript.instance.score, collisionScoreLoss);
+        GameControllerScript.instance.multiplier = 0;
 
         MuffleAudio();
         Invoke(nameof(ResetAudioEffects), muffledDuration);
@@ -102,7 +103,8 @@ public class PlayerController : MonoBehaviour
 
     public void MovePlayer()
     {
-        GameControllerScript.instance.score += 10;
+        GameControllerScript.instance.multiplier += 1;
+        GameControllerScript.instance.score += (int)(10 * (GameControllerScript.instance.multiplier * 0.1f));
         Vector2 pointDirection = createVector();
         if (Mathf.Abs(pointDirection.x) == 1f)
             {

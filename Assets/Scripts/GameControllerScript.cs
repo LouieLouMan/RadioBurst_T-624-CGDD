@@ -4,6 +4,7 @@ public class GameControllerScript : MonoBehaviour
 {
     public static GameControllerScript instance;
     public int score = 0;
+    public int multiplier = 0;
     void Awake()
     {
         instance = this;
