@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/RadioBurst - MAIN.unity
+    path: Assets/Scenes/stis.unity
     guid: 3c5060ae08f914936b2eceb1b277a8c4
   m_configObjects: {}
