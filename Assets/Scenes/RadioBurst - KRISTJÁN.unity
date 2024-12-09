@@ -1084,7 +1084,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 6.75, y: -4.59}
+  m_AnchoredPosition: {x: 6.75, y: -4.68}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!199 &797801149
@@ -1243,9 +1243,9 @@ ParticleSystem:
     enabled: 1
     startLifetime:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1.25
-      minScalar: 5
+      minScalar: 0.9
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -6838,8 +6838,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 0.0x
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 562103e4f2dba654ab4968b15411dcba, type: 2}
-  m_sharedMaterial: {fileID: -9207332378837369924, guid: 562103e4f2dba654ab4968b15411dcba, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 53743158d304cf54dacea1b99c258fa0, type: 2}
+  m_sharedMaterial: {fileID: -3333891759493213744, guid: 53743158d304cf54dacea1b99c258fa0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -6863,8 +6863,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 1
-  m_fontSizeBase: 1
+  m_fontSize: 4
+  m_fontSizeBase: 4
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -7279,7 +7279,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1707666452}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
