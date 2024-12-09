@@ -32,7 +32,15 @@ public class MultiplierLabelScript : MonoBehaviour
         multiplier = GameControllerScript.instance.multiplier;
         multiplier = multiplier * 0.1f;
         if (multiplier != last_mult) {
+            if (multiplier == 0)
+            {
+                _animator.StopPlayback();
+                _animator.SetTrigger("multireset");
+            }
+            else
+            {
             _animator.SetTrigger("Pop");
+            }
             last_mult = multiplier;
         }
         if (multiplier >= 3 && multiplier < 10)
