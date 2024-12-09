@@ -26,24 +26,34 @@ public class MultiplierLabelScript : MonoBehaviour
     
     void Update()
     {
+        var pmain = particles.main;
+        var pem = particles.emission;
+        var pcol = particles.colorOverLifetime;
         multiplier = GameControllerScript.instance.multiplier;
         multiplier = multiplier * 0.1f;
         if (multiplier != last_mult) {
             _animator.SetTrigger("Pop");
             last_mult = multiplier;
         }
-        if (multiplier >= 3)
+        if (multiplier >= 3 && multiplier < 10)
         {
-            var pmain = particles.main;
             pmain.maxParticles = (int)(multiplier * multiplier * multiplier);
-            var pem = particles.emission;
             pem.rateOverTime = multiplier * multiplier * multiplier / 10;
+
+            Gradient grad = new Gradient();
+            grad.SetKeys( new GradientColorKey[] { new(new Color(255f/255f, 198f/255f, 117f/255f), 0.0f), new(new Color(255f/255f, 0f/255f, 0f/255f), 0.65f) }, new GradientAlphaKey[] { new(1.0f, 1.0f), new(1.0f, 1.0f) } );
+            pcol.color = grad;
+
+        }
+        else if (multiplier >= 10)
+        {
+            Gradient grad = new Gradient();
+            grad.SetKeys( new GradientColorKey[] { new(new Color(160f/255f, 255f/255f, 229f/255f), 0.0f), new(Color.blue, 0.65f) }, new GradientAlphaKey[] { new(1.0f, 1.0f), new(1.0f, 1.0f) } );
+            pcol.color = grad;
         }
         else 
         {
-            var pmain = particles.main;
             pmain.maxParticles = 0;
-            var pem = particles.emission;
             pem.rateOverTime = 5;
         }
         scoreLabel.text = multiplier.ToString("F1") + "X";
