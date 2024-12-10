@@ -12347,7 +12347,7 @@ MonoBehaviour:
   INVINCIBLE_FRAMES: 15
   isInvincible: 0
   gameAudioMixer: {fileID: 24100000, guid: 6add3da4c78038f45861ba43199c3644, type: 2}
-  muffledFrequency: 500
+  muffledFrequency: 2500
   normalFrequency: 22000
   muffledDuration: 1.5
   warpedPitch: 1
