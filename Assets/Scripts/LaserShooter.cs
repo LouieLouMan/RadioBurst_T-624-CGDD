@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using System.IO;
+using UnityEditor;
 
 public class LaserShooter : MonoBehaviour
 {
@@ -19,14 +20,16 @@ public class LaserShooter : MonoBehaviour
         public int x_pos;
         public int y_pos;
         public int degrees;
+        public float speed;
         public EnemyType enemyType;
 
-        public Enemy(int beat, int x_pos, int y_pos, int degrees, EnemyType enemyType){
+        public Enemy(int beat, int x_pos, int y_pos, int degrees, EnemyType enemyType, float speed){
             this.beat = beat;
             this.x_pos = x_pos;
             this.y_pos = y_pos;
             this.degrees = degrees;
             this.enemyType = enemyType;
+            this.speed = speed;
         }
     }
     public List<Enemy> enemies;
@@ -50,7 +53,8 @@ public class LaserShooter : MonoBehaviour
                     int.Parse(values[1]), 
                     int.Parse(values[2]),
                     int.Parse(values[3]),
-                    (EnemyType)int.Parse(values[4])
+                    (EnemyType)int.Parse(values[4]),
+                    float.Parse(values[5])
                 )
             );
         }
@@ -78,7 +82,7 @@ public class LaserShooter : MonoBehaviour
             }
             if (e.enemyType == EnemyType.bullet)
             {
-                spawnBulletAt(e.x_pos, e.y_pos, e.degrees);
+                spawnBulletAt(e.x_pos, e.y_pos, e.degrees, e.speed);
             }
         }
 
@@ -101,11 +105,13 @@ public class LaserShooter : MonoBehaviour
         Destroy(laserShot, AudioManager.instance.spb * 4);
     }
 
-    void spawnBulletAt(int x_pos, int y_pos, int degrees)
+    void spawnBulletAt(int x_pos, int y_pos, int degrees, float speed)
     {
         Vector3 bulletPosition = new Vector3(x_pos, y_pos, -2);
         GameObject bulletShot = Instantiate(bullet, bulletPosition, Quaternion.identity);
-        bulletShot.GetComponent<Bullet>().direction = Quaternion.Euler(0f,0f,degrees) * bulletShot.GetComponent<Bullet>().direction;
+        var x = bulletShot.GetComponent<Bullet>();
+        x.speed = speed;
+        bulletShot.GetComponent<Bullet>().direction = Quaternion.Euler(0f,0f,degrees) * x.direction * x.speed;
         Destroy(bulletShot, 15);
     }
 }
