@@ -74,12 +74,13 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D other)
     {
-        isInvincible = true;
+        mainCamera.GetComponent<Shake>().start = true;
         hitOnBeat = AudioManager.instance.currentBeat; 
+        playerParticle.Play();
+        
+        isInvincible = true;
         playerCollider.enabled = false;
         playerSprite.enabled = false;
-        playerParticle.Play();
-        mainCamera.GetComponent<Shake>().start = true;
         
         
         GameControllerScript.instance.score -= math.min(GameControllerScript.instance.score, collisionScoreLoss);

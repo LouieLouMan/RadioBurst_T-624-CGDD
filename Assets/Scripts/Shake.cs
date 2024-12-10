@@ -6,7 +6,7 @@ public class Shake : MonoBehaviour
 {
     public bool start = false;
     public AnimationCurve Curve;
-    public float duration = 1.0f;
+    public float duration = 1.5f;
 
 
     // Update is called once per frame
