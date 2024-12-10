@@ -16,18 +16,14 @@ public class AudioManager : MonoBehaviour
     float lastTimer;
     float beatTimer;
     float lastBeatTimer;
-    bool cameraOdd = false;
     public GameObject player;
     public int currentBeat;
     public bool isPlaying = false;
     public static AudioManager instance;
-
     public GameObject pressSpaceToStartTxt;
-
-    private Color black = Color.black;
-    private Color crimson = new(70f/255f, 0, 70f/255f, 0.75f);
     private bool movedOnBeat = false;
     private float graceCooldown;
+    private int pulse = 0;
 
     // Start is called before the first frame update
     
@@ -80,6 +76,12 @@ public class AudioManager : MonoBehaviour
             if (timer > spb && lastTimer <= spb)
             {
                 timer %= spb;
+                if (pulse % 2 == 0){
+                    Camera.main.GetComponent<PulsingBackground>().PulseBackground();
+                }
+                Camera.main.GetComponent<PulsingBackground>().PulseBeatIndicator();
+                pulse++;
+
                 Camera.main.backgroundColor = cameraOdd ? crimson : black;
                 cameraOdd = !cameraOdd;
 
