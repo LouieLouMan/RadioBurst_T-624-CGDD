@@ -13,7 +13,8 @@ public class PlayerController : MonoBehaviour
     public Collider2D playerCollider; 
     public ParticleSystem playerParticle;
     public SpriteRenderer playerSprite;
-    public AudioSource dmg;
+    public AudioSource playerSourceSFX;
+    public AudioClip PlayerClipSFX;
     public Camera mainCamera;
     public float hitOnBeat;
     public bool doubleSpeed = false;
@@ -32,8 +33,6 @@ public class PlayerController : MonoBehaviour
     {
         movePoint.parent = null;
         lastHitKey = KeyCode.W;
-        //playerParticle = GetComponent<ParticleSystem>();
-        dmg = GetComponent<AudioSource>();
         ResetAudioEffects();
         
     }
@@ -77,6 +76,7 @@ public class PlayerController : MonoBehaviour
         mainCamera.GetComponent<Shake>().start = true;
         hitOnBeat = AudioManager.instance.currentBeat; 
         playerParticle.Play();
+        playerSourceSFX.PlayOneShot(PlayerClipSFX);
         
         isInvincible = true;
         playerCollider.enabled = false;
@@ -106,9 +106,7 @@ public class PlayerController : MonoBehaviour
                 playerSprite.enabled = true;
                 isInvincible = false;
             }
-
         }
-
     }
 
     public void MovePlayer()
