@@ -21,11 +21,13 @@ public class PlayerController : MonoBehaviour
     public int INVINCIBLE_FRAMES;
     public bool isInvincible = false;
     public AudioMixer gameAudioMixer;
-    public float muffledFrequency = 500f;  // Frequency for muffling
-    public float normalFrequency = 22000f; // Normal frequency
-    public float muffledDuration = 1.5f;   // Duration of muffling effect
-    public float warpedPitch = 0.8f;       // Pitch for warp effect
-    public float normalPitch = 1.0f;       // Normal pitch
+    public float muffledFrequency = 500f;
+    public float normalFrequency = 22000f;
+    public float muffledDuration = 1.5f;
+    public float warpedPitch = 0.8f;
+    public float normalPitch = 1.0f;
+    Animator scoreAnimator;
+
 
 
     // Start is called before the first frame update
@@ -34,16 +36,15 @@ public class PlayerController : MonoBehaviour
         movePoint.parent = null;
         lastHitKey = KeyCode.W;
         ResetAudioEffects();
-        
+        scoreAnimator = GameObject.Find("UiPlayerScore").GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
         PlayerInvincibility();
-        
-        transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed * Time.deltaTime);
+       
+        transform.position = Vector3.Lerp(transform.position, movePoint.position, Ease(moveSpeed * Time.deltaTime));
 
         if (Input.GetKeyDown(KeyCode.A))
         {
@@ -64,11 +65,6 @@ public class PlayerController : MonoBehaviour
         {
             lastHitKey = KeyCode.S;
         }
-
-        // if (Input.GetKeyDown(KeyCode.LeftShift))
-        // {
-        //     doubleSpeed = !doubleSpeed;
-        // }
     }
 
     void OnTriggerStay2D(Collider2D other)
@@ -84,6 +80,7 @@ public class PlayerController : MonoBehaviour
         
         
         GameControllerScript.instance.score -= math.min(GameControllerScript.instance.score, collisionScoreLoss);
+        GameControllerScript.instance.multiplier = 0;
 
         MuffleAudio();
         Invoke(nameof(ResetAudioEffects), muffledDuration);
@@ -111,7 +108,9 @@ public class PlayerController : MonoBehaviour
 
     public void MovePlayer()
     {
-        GameControllerScript.instance.score += 10;
+        GameControllerScript.instance.multiplier += 1;
+        GameControllerScript.instance.score += (int)(10 * (GameControllerScript.instance.multiplier * 0.1f));
+        scoreAnimator.SetTrigger("scorePop");
         Vector2 pointDirection = createVector();
         if (Mathf.Abs(pointDirection.x) == 1f)
             {
@@ -179,6 +178,11 @@ public class PlayerController : MonoBehaviour
         
         // Restore the normal pitch
         gameAudioMixer.SetFloat("MasterPitch", normalPitch);
+    }
+
+    float Ease(float x)
+    {
+        return x * x;
     }
 }
 
