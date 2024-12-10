@@ -59,7 +59,7 @@ public class AudioManager : MonoBehaviour
         graceCooldown += Time.deltaTime;
 
         if (isPlaying){
-            if (currentBeat >= 900)
+            if (currentBeat >= 920)
             {
                 GameOverCanvas.instance.PauseGame();
                 isPlaying = false;
@@ -93,7 +93,12 @@ public class AudioManager : MonoBehaviour
                 movedOnBeat = false;
             }
 
-            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D))
+            if (
+                Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow) ||
+                Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow) || 
+                Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow) ||
+                Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)
+                )
             {
                 if (IsInputOnBeat() && !movedOnBeat)
                 {
