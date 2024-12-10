@@ -82,9 +82,6 @@ public class AudioManager : MonoBehaviour
                 Camera.main.GetComponent<PulsingBackground>().PulseBeatIndicator();
                 pulse++;
 
-                Camera.main.backgroundColor = cameraOdd ? crimson : black;
-                cameraOdd = !cameraOdd;
-
                 if (!movedOnBeat && graceCooldown > spb * 1.5f)
                 {
                     GameControllerScript.instance.multiplier = Mathf.Max(0, GameControllerScript.instance.multiplier - 2);
