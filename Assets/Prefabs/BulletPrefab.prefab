@@ -139,7 +139,6 @@ MonoBehaviour:
   speed: 2.5
   body: {fileID: -3485175433926391709}
   direction: {x: 0, y: -1}
-  ps: {fileID: 0}
 --- !u!50 &-3485175433926391709
 Rigidbody2D:
   serializedVersion: 4
@@ -303,7 +302,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.4
+      scalar: 0.2
       minScalar: 5
       maxCurve:
         serializedVersion: 2
