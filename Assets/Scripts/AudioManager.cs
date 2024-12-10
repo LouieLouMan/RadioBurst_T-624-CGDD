@@ -100,7 +100,6 @@ public class AudioManager : MonoBehaviour
                     movedOnBeat = true;
                     graceCooldown = 0;
                     player.GetComponent<PlayerController>().MovePlayer();
-                    Debug.Log("Input was on beat!");
                 }
                 else
                 {
@@ -115,7 +114,6 @@ public class AudioManager : MonoBehaviour
     bool IsInputOnBeat()
     {
         float timeSinceLastBeat = Mathf.Abs(timer - spb);
-        Debug.Log(timeSinceLastBeat + " " + spb + " <- wtf");
         return timeSinceLastBeat <= inputTolerance || spb - timeSinceLastBeat <= inputTolerance;
     }
 }

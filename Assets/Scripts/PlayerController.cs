@@ -41,11 +41,7 @@ public class PlayerController : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        PlayerInvincibility();
-       
-        transform.position = Vector3.Lerp(transform.position, movePoint.position, Ease(moveSpeed * Time.deltaTime));
-
+    {  
         if (Input.GetKeyDown(KeyCode.A))
         {
             lastHitKey = KeyCode.A;
@@ -65,6 +61,10 @@ public class PlayerController : MonoBehaviour
         {
             lastHitKey = KeyCode.S;
         }
+
+        transform.position = Vector3.Lerp(transform.position, movePoint.position, Ease(moveSpeed * Time.deltaTime));
+        PlayerInvincibility();
+
     }
 
     void OnTriggerStay2D(Collider2D other)
