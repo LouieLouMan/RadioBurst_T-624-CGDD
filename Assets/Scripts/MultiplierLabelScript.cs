@@ -71,6 +71,15 @@ public class MultiplierLabelScript : MonoBehaviour
         }
         else 
         {
+            if (redFire.isPlaying)
+            {
+                redFire.Stop();
+            }
+            if (blueFire.isPlaying)
+            {
+                blueFire.Stop();
+            }
+
             pmain.maxParticles = 0;
             pem.rateOverTime = 5;
         }
