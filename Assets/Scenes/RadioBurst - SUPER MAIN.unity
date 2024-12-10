@@ -12340,7 +12340,7 @@ MonoBehaviour:
   playerParticle: {fileID: 1707666460}
   playerSprite: {fileID: 1707666453}
   playerSourceSFX: {fileID: 1707666458}
-  PlayerClipSFX: {fileID: 8300000, guid: cd22bc2fc87644d2e97574e2128c34c2, type: 3}
+  PlayerClipSFX: {fileID: 8300000, guid: 0e9c9822fe09049c28f9f8087d9257f7, type: 3}
   mainCamera: {fileID: 421091195}
   hitOnBeat: 0
   doubleSpeed: 0
@@ -12434,7 +12434,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 8278717f2ca224b03a371de73dcacbfe, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 0e9c9822fe09049c28f9f8087d9257f7, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.5
   m_Pitch: 1.2
