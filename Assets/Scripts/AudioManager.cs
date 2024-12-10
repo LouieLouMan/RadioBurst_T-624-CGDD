@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using Unity.Mathematics;
 using UnityEditor.IMGUI.Controls;
@@ -81,6 +82,11 @@ public class AudioManager : MonoBehaviour
                 timer %= spb;
                 Camera.main.backgroundColor = cameraOdd ? crimson : black;
                 cameraOdd = !cameraOdd;
+
+                if (!movedOnBeat && graceCooldown > spb * 1.5f)
+                {
+                    GameControllerScript.instance.multiplier = Mathf.Max(0, GameControllerScript.instance.multiplier - 2);
+                }
             }
 
             if (graceCooldown > 0.25f)

@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     public float muffledDuration = 1.5f;   // Duration of muffling effect
     public float warpedPitch = 0.8f;       // Pitch for warp effect
     public float normalPitch = 1.0f;       // Normal pitch
+    Animator scoreAnimator;
 
 
     // Start is called before the first frame update
@@ -32,6 +33,7 @@ public class PlayerController : MonoBehaviour
         lastHitKey = KeyCode.W;
         dmg = GetComponent<AudioSource>();
         ResetAudioEffects();
+        scoreAnimator = GameObject.Find("UiPlayerScore").GetComponent<Animator>();
         
     }
 
@@ -78,6 +80,7 @@ public class PlayerController : MonoBehaviour
         playerSprite.enabled = false;
         isInvincible = true;
         GameControllerScript.instance.score -= math.min(GameControllerScript.instance.score, collisionScoreLoss);
+        GameControllerScript.instance.multiplier = 0;
 
         MuffleAudio();
         Invoke(nameof(ResetAudioEffects), muffledDuration);
@@ -102,7 +105,9 @@ public class PlayerController : MonoBehaviour
 
     public void MovePlayer()
     {
-        GameControllerScript.instance.score += 10;
+        GameControllerScript.instance.multiplier += 1;
+        GameControllerScript.instance.score += (int)(10 * (GameControllerScript.instance.multiplier * 0.1f));
+        scoreAnimator.SetTrigger("scorePop");
         Vector2 pointDirection = createVector();
         if (Mathf.Abs(pointDirection.x) == 1f)
             {
