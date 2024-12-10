@@ -22,6 +22,7 @@ public class AudioManager : MonoBehaviour
     public GameObject pressSpaceToStartTxt;
     private bool movedOnBeat = false;
     private float graceCooldown;
+    private int pulse = 0;
 
     // Start is called before the first frame update
     
@@ -74,7 +75,11 @@ public class AudioManager : MonoBehaviour
             if (timer > spb && lastTimer <= spb)
             {
                 timer %= spb;
-                Camera.main.GetComponent<PulsingBackground>().Pulse();
+                if (pulse % 2 == 0){
+                    Camera.main.GetComponent<PulsingBackground>().PulseBackground();
+                }
+                Camera.main.GetComponent<PulsingBackground>().PulseBeatIndicator();
+                pulse++;
             }
 
             if (graceCooldown > 0.25f)
