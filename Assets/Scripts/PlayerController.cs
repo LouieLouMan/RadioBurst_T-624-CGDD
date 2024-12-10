@@ -11,8 +11,11 @@ public class PlayerController : MonoBehaviour
     public Transform movePoint;
     private KeyCode lastHitKey;
     public Collider2D playerCollider; 
+    public ParticleSystem playerParticle;
     public SpriteRenderer playerSprite;
-    public AudioSource dmg;
+    public AudioSource playerSourceSFX;
+    public AudioClip PlayerClipSFX;
+    public Camera mainCamera;
     public float hitOnBeat;
     public bool doubleSpeed = false;
     public int INVINCIBLE_FRAMES;
@@ -32,7 +35,6 @@ public class PlayerController : MonoBehaviour
     {
         movePoint.parent = null;
         lastHitKey = KeyCode.W;
-        dmg = GetComponent<AudioSource>();
         ResetAudioEffects();
         scoreAnimator = GameObject.Find("UiPlayerScore").GetComponent<Animator>();
     }
@@ -40,10 +42,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isInvincible == true){
-            PlayerContinuousCollisions();
-        }
-
+        PlayerInvincibility();
+       
         transform.position = Vector3.Lerp(transform.position, movePoint.position, Ease(moveSpeed * Time.deltaTime));
 
         if (Input.GetKeyDown(KeyCode.A))
@@ -67,14 +67,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerStay2D(Collider2D other)
     {
+        mainCamera.GetComponent<Shake>().start = true;
         hitOnBeat = AudioManager.instance.currentBeat; 
-        dmg.Play();
+        playerParticle.Play();
+        playerSourceSFX.PlayOneShot(PlayerClipSFX);
         
+        isInvincible = true;
         playerCollider.enabled = false;
         playerSprite.enabled = false;
-        isInvincible = true;
+        
+        
         GameControllerScript.instance.score -= math.min(GameControllerScript.instance.score, collisionScoreLoss);
         GameControllerScript.instance.multiplier = 0;
 
@@ -82,20 +86,23 @@ public class PlayerController : MonoBehaviour
         Invoke(nameof(ResetAudioEffects), muffledDuration);
     }
 
-    void PlayerContinuousCollisions(){
+    void PlayerInvincibility(){
 
-        if(AudioManager.instance.currentBeat < hitOnBeat+INVINCIBLE_FRAMES){
-            if(AudioManager.instance.currentBeat % 2 == 0){
-                playerSprite.enabled = true;
-            }else {
-                playerSprite.enabled = false;
+        if(isInvincible){
+            if(AudioManager.instance.currentBeat < hitOnBeat+INVINCIBLE_FRAMES){
+                if(AudioManager.instance.currentBeat % 2 == 0){
+                    playerSprite.enabled = true;
+                }else {
+                    playerSprite.enabled = false;
+                }
             }
-        }
 
-        if (AudioManager.instance.currentBeat >= hitOnBeat+INVINCIBLE_FRAMES){
-            playerCollider.enabled = true;
-            playerSprite.enabled = true;
-            isInvincible = false;
+            if (AudioManager.instance.currentBeat >= hitOnBeat+INVINCIBLE_FRAMES){
+                playerParticle.Clear();
+                playerCollider.enabled = true;
+                playerSprite.enabled = true;
+                isInvincible = false;
+            }
         }
     }
 

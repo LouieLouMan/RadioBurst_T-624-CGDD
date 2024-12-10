@@ -5,6 +5,8 @@ public class Bullet : MonoBehaviour
     public float speed;
     public Rigidbody2D body;
     public UnityEngine.Vector2 direction;
+    public float elapsedTime = 0f;
+    public float timeBeforeDestroy = 1.0f;
     
     // Start is called before the first frame update
     void Start()
@@ -16,10 +18,12 @@ public class Bullet : MonoBehaviour
     void Update()
     {
         
+        
     }
-
-    void OnTriggerEnter2D(Collider2D other){
+    //destroy the object after 
+    void OnTriggerStay2D(Collider2D other){
+        if(other.tag == "ShadowLightning"){
             Destroy(gameObject);
-
+        }
     }
 }
