@@ -18,11 +18,11 @@ public class PlayerController : MonoBehaviour
     public int INVINCIBLE_FRAMES;
     public bool isInvincible = false;
     public AudioMixer gameAudioMixer;
-    public float muffledFrequency = 500f;  // Frequency for muffling
-    public float normalFrequency = 22000f; // Normal frequency
-    public float muffledDuration = 1.5f;   // Duration of muffling effect
-    public float warpedPitch = 0.8f;       // Pitch for warp effect
-    public float normalPitch = 1.0f;       // Normal pitch
+    public float muffledFrequency = 500f;
+    public float normalFrequency = 22000f;
+    public float muffledDuration = 1.5f;
+    public float warpedPitch = 0.8f;
+    public float normalPitch = 1.0f;
 
 
     // Start is called before the first frame update
@@ -32,7 +32,6 @@ public class PlayerController : MonoBehaviour
         lastHitKey = KeyCode.W;
         dmg = GetComponent<AudioSource>();
         ResetAudioEffects();
-        
     }
 
     // Update is called once per frame
@@ -41,7 +40,8 @@ public class PlayerController : MonoBehaviour
         if(isInvincible == true){
             PlayerContinuousCollisions();
         }
-        transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed * Time.deltaTime);
+
+        transform.position = Vector3.Lerp(transform.position, movePoint.position, Ease(moveSpeed * Time.deltaTime));
 
         if (Input.GetKeyDown(KeyCode.A))
         {
@@ -62,11 +62,6 @@ public class PlayerController : MonoBehaviour
         {
             lastHitKey = KeyCode.S;
         }
-
-        // if (Input.GetKeyDown(KeyCode.LeftShift))
-        // {
-        //     doubleSpeed = !doubleSpeed;
-        // }
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -170,6 +165,11 @@ public class PlayerController : MonoBehaviour
         
         // Restore the normal pitch
         gameAudioMixer.SetFloat("MasterPitch", normalPitch);
+    }
+
+    float Ease(float x)
+    {
+        return x * x;
     }
 }
 

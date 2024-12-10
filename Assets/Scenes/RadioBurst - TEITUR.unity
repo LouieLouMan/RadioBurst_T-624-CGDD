@@ -2580,7 +2580,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9af2f3969d73240abbbff0c9aad67081, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 25
+  moveSpeed: 38
   movementScoreGain: 10
   collisionScoreLoss: 100
   levelBounds: {x: 4, y: 4}
