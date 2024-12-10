@@ -7,6 +7,7 @@ public class Laser : MonoBehaviour
     public Sprite phase1;
     public Sprite phase2;
     public Sprite phaseDamage;
+    public SpriteRenderer laserglow;
     int lastBeat;
 
     // Start is called before the first frame update
@@ -15,6 +16,7 @@ public class Laser : MonoBehaviour
         lastBeat = AudioManager.instance.currentBeat;
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = phase1;
+        laserglow.gameObject.SetActive(false);
     }
 
     void Update()
@@ -25,6 +27,7 @@ public class Laser : MonoBehaviour
        if (AudioManager.instance.currentBeat == (lastBeat+8)){
             spriteRenderer.sprite = phaseDamage;
             GetComponent<BoxCollider2D>().enabled = true;
+            laserglow.gameObject.SetActive(true);
        }
     }
 }

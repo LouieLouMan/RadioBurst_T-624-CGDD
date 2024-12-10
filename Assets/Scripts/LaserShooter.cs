@@ -94,7 +94,7 @@ public class LaserShooter : MonoBehaviour
         }
         else
         {
-            laserPosition = new Vector3(position, 0 ,0);
+            laserPosition = new Vector3(position, 0 ,-1);
         }
         Quaternion rotation = horizontal ? Quaternion.Euler(0, 0, 90) : Quaternion.identity;
         GameObject laserShot = Instantiate(laser, laserPosition, rotation);
@@ -103,7 +103,7 @@ public class LaserShooter : MonoBehaviour
 
     void spawnBulletAt(int x_pos, int y_pos, int degrees)
     {
-        Vector3 bulletPosition = new Vector3(x_pos, y_pos, 0);
+        Vector3 bulletPosition = new Vector3(x_pos, y_pos, -2);
         GameObject bulletShot = Instantiate(bullet, bulletPosition, Quaternion.identity);
         bulletShot.GetComponent<Bullet>().direction = Quaternion.Euler(0f,0f,degrees) * bulletShot.GetComponent<Bullet>().direction;
         Destroy(bulletShot, 15);
