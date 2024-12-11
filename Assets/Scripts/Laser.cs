@@ -28,10 +28,13 @@ public class Laser : MonoBehaviour
             spriteRenderer.sprite = phase2;
        }
        if (AudioManager.instance.currentBeat == (lastBeat+8)){
-            mainCamera.GetComponent<Shake>().LaserShake();
             spriteRenderer.sprite = phaseDamage;
+            
+            AudioManager.instance.PlayLaserSound();
+            mainCamera.GetComponent<Shake>().LaserShake();
             GetComponent<BoxCollider2D>().enabled = true;
             laserglow.gameObject.SetActive(true);
        }
     }
+    
 }

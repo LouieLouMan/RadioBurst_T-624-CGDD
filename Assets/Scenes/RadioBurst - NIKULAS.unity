@@ -18275,14 +18275,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   song: {fileID: 0}
-  offBeatSource: {fileID: 0}
+  offBeatSource: {fileID: 2123659502}
+  laserSoundSource: {fileID: 2123659502}
   bpm: 122
   spb: 0
   inputTolerance: 0.15
   player: {fileID: 1707666452}
+  mainCamera: {fileID: 0}
   currentBeat: -1
   isPlaying: 0
-  offBeatNoise: {fileID: 8300000, guid: a7272503a62154651980b8ba7946e798, type: 3}
+  offBeatNoise: {fileID: 8300000, guid: 2fa08048aa0154fb987255b72ce9acb1, type: 3}
+  laserSFX: {fileID: 8300000, guid: 6de4c40cc4aba43509e31cb2975cfd58, type: 3}
   pressSpaceToStartTxt: {fileID: 1430987750}
 --- !u!4 &2123659504
 Transform:

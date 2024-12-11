@@ -5,6 +5,9 @@ public class AudioManager : MonoBehaviour
 
     public AudioSource song;
     public AudioSource offBeatSource;
+    public AudioSource laserSoundSource;
+    public AudioClip offBeatNoise;
+    public AudioClip laserSFX;
     public float bpm;
     public float spb;
     public float inputTolerance = 0.15f;
@@ -17,11 +20,11 @@ public class AudioManager : MonoBehaviour
     public int currentBeat;
     public bool isPlaying = false;
     public static AudioManager instance;
-    public AudioClip offBeatNoise;
     public GameObject pressSpaceToStartTxt;
     private bool movedOnBeat = false;
     private float graceCooldown;
     private int pulse = 0;
+    public bool laserSoundPlaying = false;
 
     // Start is called before the first frame update
     
@@ -122,4 +125,19 @@ public class AudioManager : MonoBehaviour
         float timeSinceLastBeat = Mathf.Abs(timer - spb);
         return timeSinceLastBeat <= inputTolerance || spb - timeSinceLastBeat <= inputTolerance;
     }
+    public void PlayLaserSound()
+    {
+        if (!laserSoundPlaying)
+        {
+            laserSoundSource.PlayOneShot(laserSFX);
+            laserSoundPlaying = true;
+
+            Invoke(nameof(ResetLaserSound), 0.4f);
+        }
+    }
+
+    public void ResetLaserSound(){
+        laserSoundPlaying = false;
+    }
+
 }
