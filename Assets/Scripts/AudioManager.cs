@@ -4,6 +4,7 @@ public class AudioManager : MonoBehaviour
 {
 
     public AudioSource song;
+    public AudioSource offBeatSource;
     public float bpm;
     public float spb;
     public float inputTolerance = 0.15f;
@@ -15,6 +16,7 @@ public class AudioManager : MonoBehaviour
     public int currentBeat;
     public bool isPlaying = false;
     public static AudioManager instance;
+    public AudioClip offBeatNoise;
     public GameObject pressSpaceToStartTxt;
     private bool movedOnBeat = false;
     private float graceCooldown;
@@ -104,6 +106,7 @@ public class AudioManager : MonoBehaviour
                 else
                 {
                     Debug.Log("Input was off-beat!");
+                    offBeatSource.PlayOneShot(offBeatNoise);
                 }
             }
 

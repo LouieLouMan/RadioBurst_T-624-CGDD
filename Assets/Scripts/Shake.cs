@@ -5,20 +5,20 @@ public class Shake : MonoBehaviour
 {
     public bool start = false;
     public AnimationCurve Curve;
+    public AnimationCurve LaserCurve;
     public float duration = 1.5f;
+    public float laserShakeDuration = 0.5f;
 
-
-    // Update is called once per frame
-    void Update()
+    private Coroutine currentShake;
+    public void PlayerHitShake()
     {  
-        if(start){
-            start = false;
-            StartCoroutine(Shaking());
-        }
-        
+            if(currentShake != null){
+                StopCoroutine(currentShake);
+            }
+            currentShake = StartCoroutine(PlayerHitShakeEnumerator()); 
     }
 
-    IEnumerator Shaking(){
+    IEnumerator PlayerHitShakeEnumerator(){
         Vector3 startPosition = transform.position;
         float elapsedTime = 0f;
 
@@ -30,6 +30,30 @@ public class Shake : MonoBehaviour
         }
 
         transform.position = startPosition;
+        currentShake = null; 
 
+    }
+    public void LaserShake()
+    {
+        if(currentShake == null){
+            currentShake = StartCoroutine(LaserShakeEnumerator());
+        }
+    }
+
+    IEnumerator LaserShakeEnumerator()
+    {
+        Vector3 startPosition = transform.position;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            float strength = LaserCurve.Evaluate(elapsedTime / laserShakeDuration);
+            transform.position = startPosition + Random.insideUnitSphere * strength;
+            yield return null;
+        }
+
+        transform.position = startPosition;
+        currentShake = null; 
     }
 }
