@@ -10,6 +10,7 @@ public class Shake : MonoBehaviour
     public float laserShakeDuration = 0.5f;
 
     private Coroutine currentShake;
+
     public void PlayerHitShake()
     {  
             if(currentShake != null){
@@ -41,6 +42,31 @@ public class Shake : MonoBehaviour
     }
 
     IEnumerator LaserShakeEnumerator()
+    {
+        Vector3 startPosition = transform.position;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            float strength = LaserCurve.Evaluate(elapsedTime / laserShakeDuration);
+            transform.position = startPosition + Random.insideUnitSphere * strength;
+            yield return null;
+        }
+
+        transform.position = startPosition;
+        currentShake = null; 
+    }
+
+        public void OffBeatShake()
+    {
+        if(currentShake != null){
+            StopCoroutine(currentShake);
+        }
+        currentShake = StartCoroutine(OffBeatShakeEnumerator());
+    }
+
+    IEnumerator OffBeatShakeEnumerator()
     {
         Vector3 startPosition = transform.position;
         float elapsedTime = 0f;

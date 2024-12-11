@@ -108,7 +108,7 @@ public class AudioManager : MonoBehaviour
                 else
                 {
                     Debug.Log("Input was off-beat!");
-                    mainCamera.GetComponent<Shake>().LaserShake();
+                    mainCamera.GetComponent<Shake>().OffBeatShake();
                     offBeatSource.PlayOneShot(offBeatNoise);
                 }
             }
