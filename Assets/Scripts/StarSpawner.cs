@@ -9,6 +9,7 @@ public class StarSpawner : MonoBehaviour
     public TextMeshProUGUI Text;
     RawImage sprite;
     int scoreTick;
+    public int spawnScore;
     string lastText = "";
     // Start is called before the first frame update
     void Start()
@@ -22,11 +23,11 @@ public class StarSpawner : MonoBehaviour
     {
         if (Text.text != lastText)
         {
-            scoreTick = int.Parse(Text.text);
+            scoreTick = int.Parse(Text.text, System.Globalization.NumberStyles.AllowThousands);
             lastText = Text.text;
         }
         
-        if (scoreTick >= 250)
+        if (scoreTick >= spawnScore)
         {
             sprite.enabled = true;
         }
