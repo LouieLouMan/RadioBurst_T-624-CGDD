@@ -13,6 +13,7 @@ public class AudioManager : MonoBehaviour
     float beatTimer;
     float lastBeatTimer;
     public GameObject player;
+    public Camera mainCamera;
     public int currentBeat;
     public bool isPlaying = false;
     public static AudioManager instance;
@@ -34,6 +35,7 @@ public class AudioManager : MonoBehaviour
         song = GetComponent<AudioSource>();
         spb = 60f/bpm;
         GetComponent<AudioSource>().clip.LoadAudioData();
+        mainCamera = Camera.main;
         graceCooldown = 0f;
     }
 
@@ -106,6 +108,7 @@ public class AudioManager : MonoBehaviour
                 else
                 {
                     Debug.Log("Input was off-beat!");
+                    mainCamera.GetComponent<Shake>().LaserShake();
                     offBeatSource.PlayOneShot(offBeatNoise);
                 }
             }
