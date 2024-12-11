@@ -4,6 +4,8 @@ using UnityEngine.EventSystems;
 public class GameOverCanvas : MonoBehaviour
 {
     public static GameOverCanvas instance;
+
+    public GameObject player;
     GameObject youLostMenu;
     
     GameObject lastSelection;
@@ -39,8 +41,9 @@ public class GameOverCanvas : MonoBehaviour
     public void PauseGame()
     {
         // Set Time.timeScale to 0 to pause gameplay
-        Time.timeScale = 0;
+        //Time.timeScale = 0;
         // Make PauseMenu panel visible (activate its gameObject)
+        player.SetActive(false);
         youLostMenu.gameObject.SetActive(true);
     }
 
@@ -49,6 +52,7 @@ public class GameOverCanvas : MonoBehaviour
         // Set Time.timeScale back to 1 to resume gameplay
         Time.timeScale = 1;
         // Hide PauseMenu panel (deactivate its gameObject)
+        player.SetActive(true);
         youLostMenu.gameObject.SetActive(false);
     }
     
