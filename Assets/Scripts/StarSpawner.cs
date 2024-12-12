@@ -10,6 +10,7 @@ public class StarSpawner : MonoBehaviour
     RawImage sprite;
     Animator animator;
     GameObject myCamera;
+    public ParticleSystem starParticles;
     
     int scoreTick;
     public int spawnScore;
@@ -17,6 +18,11 @@ public class StarSpawner : MonoBehaviour
     bool spawned = false;
     bool played = false;
     // Start is called before the first frame update
+
+    void Awake()
+    {
+        starParticles.Stop();
+    }
     void Start()
     {
         sprite = GetComponent<RawImage>();
@@ -49,9 +55,17 @@ public class StarSpawner : MonoBehaviour
             {
                 played = false;
                 myCamera.GetComponent<Shake>().start = true;
+                StartCoroutine(PlayParticles());
             }
         }
 
 
+    }
+
+    private IEnumerator PlayParticles()
+    {
+        starParticles.Play();
+        yield return new WaitForSeconds(1);
+        starParticles.Stop();
     }
 }
