@@ -59,6 +59,19 @@ public class AudioManager : MonoBehaviour
         beatTimer += Time.deltaTime;
         graceCooldown += Time.deltaTime;
 
+        if (!isPlaying)
+        {
+            if (timer > 0.3f)
+            {
+                pressSpaceToStartTxt.gameObject.SetActive(false);
+            }
+            if (timer > 0.6f)
+            {
+                pressSpaceToStartTxt.gameObject.SetActive(true);
+                timer = 0;
+            }
+        }
+
         if (isPlaying){
             if (currentBeat >= 920)
             {

@@ -20,4 +20,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/RadioBurst - MAIN.unity
     guid: 5478873a145424444b4422f00c2ad1a0
+  - enabled: 1
+    path: Assets/Scenes/HowToPlay-MAIN.unity
+    guid: feac48b1d1c373b489f2e434b86f3db0
+  - enabled: 1
+    path: Assets/Scenes/Credits-MAIN.unity
+    guid: e14ca00288c8fe64da838531156cf7a0
   m_configObjects: {}
