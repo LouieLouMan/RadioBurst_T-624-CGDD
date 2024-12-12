@@ -13,10 +13,14 @@ public class MultiplierLabelScript : MonoBehaviour
     public Animator _animator;
     public Transform body;
 
-    void Start() 
+    void Awake()
     {
         redFire.Stop();
         blueFire.Stop();
+    }
+
+    void Start() 
+    {
         var pmain = redFire.main;
         pmain.maxParticles = 0;
         var pem = redFire.emission;
