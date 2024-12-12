@@ -9,6 +9,7 @@ public class GameOverCanvas : MonoBehaviour
     GameObject youLostMenu;
     
     GameObject lastSelection;
+    GameObject playingUI;
 
     public int baseOpacity = 0;
 
@@ -19,6 +20,7 @@ public class GameOverCanvas : MonoBehaviour
     void Start()
     {
         youLostMenu = this.transform.GetChild(0).gameObject;
+        playingUI = GameObject.Find("GameUiCanvas");
     }
 
     void Update()
@@ -44,6 +46,7 @@ public class GameOverCanvas : MonoBehaviour
         //Time.timeScale = 0;
         // Make PauseMenu panel visible (activate its gameObject)
         player.SetActive(false);
+        playingUI.SetActive(false);
         youLostMenu.gameObject.SetActive(true);
     }
 
@@ -53,6 +56,7 @@ public class GameOverCanvas : MonoBehaviour
         Time.timeScale = 1;
         // Hide PauseMenu panel (deactivate its gameObject)
         player.SetActive(true);
+        playingUI.SetActive(true);
         youLostMenu.gameObject.SetActive(false);
     }
     
