@@ -78,8 +78,6 @@ public class PlayerController : MonoBehaviour
         playerCollider.enabled = false;
         playerSprite.enabled = false;
         
-        
-        GameControllerScript.instance.score -= math.min(GameControllerScript.instance.score, collisionScoreLoss);
         GameControllerScript.instance.multiplier = 0;
 
         MuffleAudio();
