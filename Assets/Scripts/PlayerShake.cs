@@ -12,12 +12,22 @@ public class PlayerShake : MonoBehaviour
     public float duration = 1.5f;
     public float laserShakeDuration = 0.5f;
     public float playerShakeDuration = 0.1f;
+    private float offBeatTimer = 0;
+
+    void Update()
+    {
+        offBeatTimer += Time.deltaTime;
+    }
     public void OffBeatShake()
     {
         if(currentShake != null){
             StopCoroutine(currentShake);
         }
-        currentShake = StartCoroutine(OffBeatShakeEnumerator());
+        if (offBeatTimer > 0.25f)
+        {
+            currentShake = StartCoroutine(OffBeatShakeEnumerator());
+            offBeatTimer = 0;
+        }
     }
     IEnumerator OffBeatShakeEnumerator()
     {

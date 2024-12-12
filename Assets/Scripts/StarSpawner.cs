@@ -54,7 +54,7 @@ public class StarSpawner : MonoBehaviour
             if (played && animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f)
             {
                 played = false;
-                myCamera.GetComponent<Shake>().start = true;
+                myCamera.GetComponent<Shake>().PlayerHitShake();
                 StartCoroutine(PlayParticles());
             }
         }

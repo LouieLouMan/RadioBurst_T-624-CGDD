@@ -13,7 +13,7 @@ public class MainMenuCanvas : MonoBehaviour
     public float animationSpeed = 0.15f;
     public float scale = 10f;
     public float scaleFactor = 3f;
-    public AudioSource mainMenuSong;
+    private AudioSource mainMenuSong;
     private Button[] buttons;
     private int i = 0;
     private float t = 0;
@@ -30,7 +30,13 @@ public class MainMenuCanvas : MonoBehaviour
 
         preloadGame = SceneManager.LoadSceneAsync(1);
         preloadGame.allowSceneActivation = false;
-        DontDestroyOnLoad(mainMenuSong);
+
+        if (mainMenuSong == null)
+        {
+            mainMenuSong = FindObjectOfType<AudioSource>();
+            mainMenuSong.mute = false;
+            DontDestroyOnLoad(mainMenuSong);
+        }
     }
 
     void Update()
