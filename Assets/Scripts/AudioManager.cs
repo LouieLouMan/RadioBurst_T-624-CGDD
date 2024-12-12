@@ -25,7 +25,6 @@ public class AudioManager : MonoBehaviour
     private float graceCooldown;
     private int pulse = 0;
     public bool laserSoundPlaying = false;
-
     // Start is called before the first frame update
     
     void Awake()
@@ -111,7 +110,9 @@ public class AudioManager : MonoBehaviour
                 else
                 {
                     Debug.Log("Input was off-beat!");
-                    mainCamera.GetComponent<Shake>().OffBeatShake();
+                    //mainCamera.GetComponent<Shake>().OffBeatShake();
+                    player.GetComponent<PlayerShake>().OffBeatShake();
+                    
                     offBeatSource.PlayOneShot(offBeatNoise);
                 }
             }

@@ -866,6 +866,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   duration: 1
   laserShakeDuration: 0.5
+  playerShakeDuration: 0.1
 --- !u!1 &467512095
 GameObject:
   m_ObjectHideFlags: 0
@@ -12278,6 +12279,7 @@ GameObject:
   - component: {fileID: 1707666458}
   - component: {fileID: 1707666460}
   - component: {fileID: 1707666459}
+  - component: {fileID: 1707666461}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -17410,6 +17412,73 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!114 &1707666461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1707666452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57ea1f79149364e4e9da828098ec5484, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerSprite: {fileID: 1707666453}
+  LaserCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1.9167523
+      outSlope: 1.9167523
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.09583333
+      value: 0.18368876
+      inSlope: 0.8471984
+      outSlope: 0.8471984
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5147502
+      value: 0.090540305
+      inSlope: 0.02533091
+      outSlope: 0.02533091
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.6504353
+      value: 0.19713183
+      inSlope: 0.8249895
+      outSlope: 0.8249895
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.080637336
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -0.5639352
+      outSlope: -0.5639352
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  duration: 1.5
+  laserShakeDuration: 0.5
+  playerShakeDuration: 0.1
 --- !u!1 &1846599958
 GameObject:
   m_ObjectHideFlags: 0
@@ -18277,6 +18346,8 @@ MonoBehaviour:
   song: {fileID: 0}
   offBeatSource: {fileID: 2123659502}
   laserSoundSource: {fileID: 2123659502}
+  offBeatNoise: {fileID: 8300000, guid: 2fa08048aa0154fb987255b72ce9acb1, type: 3}
+  laserSFX: {fileID: 8300000, guid: 6de4c40cc4aba43509e31cb2975cfd58, type: 3}
   bpm: 122
   spb: 0
   inputTolerance: 0.15
@@ -18284,9 +18355,8 @@ MonoBehaviour:
   mainCamera: {fileID: 0}
   currentBeat: -1
   isPlaying: 0
-  offBeatNoise: {fileID: 8300000, guid: 2fa08048aa0154fb987255b72ce9acb1, type: 3}
-  laserSFX: {fileID: 8300000, guid: 6de4c40cc4aba43509e31cb2975cfd58, type: 3}
   pressSpaceToStartTxt: {fileID: 1430987750}
+  laserSoundPlaying: 0
 --- !u!4 &2123659504
 Transform:
   m_ObjectHideFlags: 0
