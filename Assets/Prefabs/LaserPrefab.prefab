@@ -104,6 +104,7 @@ MonoBehaviour:
   phase2: {fileID: -780214955, guid: fc26bb702cf3c403ca44f5dfd77fd5c9, type: 3}
   phaseDamage: {fileID: -376623956, guid: fc26bb702cf3c403ca44f5dfd77fd5c9, type: 3}
   laserglow: {fileID: 3982161192560963866}
+  mainCamera: {fileID: 0}
 --- !u!61 &5155967229280135373
 BoxCollider2D:
   m_ObjectHideFlags: 0

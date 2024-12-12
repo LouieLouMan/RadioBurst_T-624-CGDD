@@ -4,6 +4,10 @@ public class AudioManager : MonoBehaviour
 {
 
     public AudioSource song;
+    public AudioSource offBeatSource;
+    public AudioSource laserSoundSource;
+    public AudioClip offBeatNoise;
+    public AudioClip laserSFX;
     public float bpm;
     public float spb;
     public float inputTolerance = 0.15f;
@@ -12,6 +16,7 @@ public class AudioManager : MonoBehaviour
     float beatTimer;
     float lastBeatTimer;
     public GameObject player;
+    public Camera mainCamera;
     public int currentBeat;
     public bool isPlaying = false;
     public static AudioManager instance;
@@ -19,7 +24,7 @@ public class AudioManager : MonoBehaviour
     private bool movedOnBeat = false;
     private float graceCooldown;
     private int pulse = 0;
-
+    public bool laserSoundPlaying = false;
     // Start is called before the first frame update
     
     void Awake()
@@ -32,6 +37,7 @@ public class AudioManager : MonoBehaviour
         song = GetComponent<AudioSource>();
         spb = 60f/bpm;
         GetComponent<AudioSource>().clip.LoadAudioData();
+        mainCamera = Camera.main;
         graceCooldown = 0f;
     }
 
@@ -104,6 +110,10 @@ public class AudioManager : MonoBehaviour
                 else
                 {
                     Debug.Log("Input was off-beat!");
+                    //mainCamera.GetComponent<Shake>().OffBeatShake();
+                    player.GetComponent<PlayerShake>().OffBeatShake();
+                    
+                    offBeatSource.PlayOneShot(offBeatNoise);
                 }
             }
 
@@ -116,4 +126,19 @@ public class AudioManager : MonoBehaviour
         float timeSinceLastBeat = Mathf.Abs(timer - spb);
         return timeSinceLastBeat <= inputTolerance || spb - timeSinceLastBeat <= inputTolerance;
     }
+    public void PlayLaserSound()
+    {
+        if (!laserSoundPlaying)
+        {
+            laserSoundSource.PlayOneShot(laserSFX);
+            laserSoundPlaying = true;
+
+            Invoke(nameof(ResetLaserSound), 0.4f);
+        }
+    }
+
+    public void ResetLaserSound(){
+        laserSoundPlaying = false;
+    }
+
 }

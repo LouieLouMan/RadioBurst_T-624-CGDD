@@ -69,7 +69,7 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D other)
     {
-        mainCamera.GetComponent<Shake>().start = true;
+        mainCamera.GetComponent<Shake>().PlayerHitShake();
         hitOnBeat = AudioManager.instance.currentBeat; 
         playerParticle.Play();
         playerSourceSFX.PlayOneShot(PlayerClipSFX);
