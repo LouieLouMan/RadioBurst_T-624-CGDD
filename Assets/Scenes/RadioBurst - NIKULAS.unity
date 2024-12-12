@@ -18133,6 +18133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e8ba2e0c9a400144862e85b0df04018, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   baseOpacity: 0
 --- !u!114 &2107668342
 MonoBehaviour:
@@ -18347,7 +18348,7 @@ MonoBehaviour:
   offBeatSource: {fileID: 2123659502}
   laserSoundSource: {fileID: 2123659502}
   offBeatNoise: {fileID: 8300000, guid: 2fa08048aa0154fb987255b72ce9acb1, type: 3}
-  laserSFX: {fileID: 8300000, guid: 6de4c40cc4aba43509e31cb2975cfd58, type: 3}
+  laserSFX: {fileID: 8300000, guid: c26ce5b754b434fd0abea03d4beaccf3, type: 3}
   bpm: 122
   spb: 0
   inputTolerance: 0.15
