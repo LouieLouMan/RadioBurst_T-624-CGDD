@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System;
+using System.Collections;
 
 public class MainMenuCanvas : MonoBehaviour
 {   
@@ -15,11 +16,14 @@ public class MainMenuCanvas : MonoBehaviour
     private Button[] buttons;
     private int i = 0;
     private float t = 0;
+    private AsyncOperation preloadScene;
 
     void Start()
     {
         buttons = GetComponentsInChildren<Button>();
         EventSystem.current.SetSelectedGameObject(buttons[0].gameObject);
+        preloadScene = SceneManager.LoadSceneAsync(1);
+        preloadScene.allowSceneActivation = false;
     }
 
     void Update()
@@ -28,7 +32,6 @@ public class MainMenuCanvas : MonoBehaviour
         if (t > 10 * Mathf.PI) t = 0;
         
         float bounceScale = BounceFunction(t);
-        Debug.Log(bounceScale);
         spriteRenderer.transform.localScale = scale * bounceScale * Vector3.one;
 
         if(EventSystem.current.currentSelectedGameObject == null)
@@ -40,6 +43,8 @@ public class MainMenuCanvas : MonoBehaviour
             lastSelection = EventSystem.current.currentSelectedGameObject;
         }
 
+        UpdateCursorPosition();
+
         if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
         {
             EventSystem.current.SetSelectedGameObject(GetNextSelection());
@@ -48,12 +53,13 @@ public class MainMenuCanvas : MonoBehaviour
         {
             EventSystem.current.SetSelectedGameObject(GetPreviousSelection());
         }
-        if (Input.GetKeyDown(KeyCode.KeypadEnter))
+        if (Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.Space))
         {
-            if (EventSystem.current == buttons[0].gameObject)
+            if (EventSystem.current.currentSelectedGameObject == buttons[0].gameObject)
             {
-                PlayGame();
-            } else if (EventSystem.current == buttons[2].gameObject)
+                StartCoroutine(AnimateCursorAndSelect());
+            } 
+            else if (EventSystem.current.currentSelectedGameObject == buttons[2].gameObject)
             {
                 Application.Quit();
             }
@@ -74,28 +80,62 @@ public class MainMenuCanvas : MonoBehaviour
     private GameObject GetNextSelection()
     {
         i = (i + 1) % buttons.Length;
-
-        cursor.rectTransform.anchoredPosition = 
-            i == 0 ? 
-            new Vector2(-150f, -119f) :  
-            new Vector2(cursor.rectTransform.anchoredPosition.x, cursor.rectTransform.anchoredPosition.y - 50f);
-
         return buttons[i].gameObject;
     }
 
     private GameObject GetPreviousSelection()
     {
-        i = i - 1 < 0 ? buttons.Length - 1 : i - 1;
-    
-        cursor.rectTransform.anchoredPosition = 
-            i == buttons.Length - 1 ? 
-            new Vector2(-150f, -219f) :
-            new Vector2(cursor.rectTransform.anchoredPosition.x, cursor.rectTransform.anchoredPosition.y + 50f);
+        i = i - 1 < 0 ? buttons.Length - 1 : i - 1;    
         return buttons[i].gameObject;
+    }
+
+    private void UpdateCursorPosition()
+    {
+        if (EventSystem.current.currentSelectedGameObject != null)
+        {
+            RectTransform selectedButtonRect = EventSystem.current.currentSelectedGameObject.GetComponent<RectTransform>();
+            if (selectedButtonRect != null)
+            {
+                cursor.rectTransform.anchoredPosition = new Vector2(
+                    -150f,
+                    selectedButtonRect.anchoredPosition.y
+                );
+            }
+        }
     }
 
     private float BounceFunction(float x)
     {
         return (float) (20f + (Math.Cos(x) / scaleFactor)); 
+    }
+
+    private IEnumerator AnimateCursorAndSelect()
+    {
+        Debug.Log("hello from the coroutine");
+        for (int i = 0; i < 12; i++)
+        {
+            cursor.enabled = !cursor.enabled;
+            yield return new WaitForSeconds(0.05f);
+        }
+        cursor.enabled = true;
+
+        RectTransform cursorTransform = cursor.rectTransform;
+        RectTransform buttonTransform = EventSystem.current.currentSelectedGameObject.GetComponent<RectTransform>();
+        Vector2 targetPosition = buttonTransform.anchoredPosition + new Vector2(50f, 0f);
+
+        float elapsedTime = 0f;
+        float duration = 0.3f;
+        Vector2 startPosition = cursorTransform.anchoredPosition;
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            cursorTransform.anchoredPosition = Vector2.Lerp(startPosition, targetPosition, elapsedTime / duration);
+            yield return null;
+        }
+
+        cursorTransform.anchoredPosition = targetPosition;
+        preloadScene.allowSceneActivation = true;
+        Debug.Log("Done!");
     }
 }
