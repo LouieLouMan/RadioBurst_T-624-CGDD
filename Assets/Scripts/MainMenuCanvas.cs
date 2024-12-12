@@ -22,7 +22,12 @@ public class MainMenuCanvas : MonoBehaviour
     void Start()
     {
         buttons = GetComponentsInChildren<Button>();
+        buttons[0].onClick.AddListener(() => StartCoroutine(SelectPlay()));
+        buttons[1].onClick.AddListener(() => StartCoroutine(SelectOther(2)));
+        buttons[2].onClick.AddListener(() => StartCoroutine(SelectOther(3)));
+
         EventSystem.current.SetSelectedGameObject(buttons[0].gameObject);
+
         preloadGame = SceneManager.LoadSceneAsync(1);
         preloadGame.allowSceneActivation = false;
         DontDestroyOnLoad(mainMenuSong);

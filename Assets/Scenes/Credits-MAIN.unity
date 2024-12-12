@@ -313,8 +313,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Level 1 - Song\nBok Globule by Elvinas Plok\n\nSound effects\nfreesound.org\n\nEverything
-    else\nKristjan, Marteinn, Nikul\xE1s og Teitur"
+  m_text: "Song for level 1:\nBok Globule by Elvinas Plok\n\nMenu song:\nThorne\u2013\u017Bytkow
+    object by Elvinas Plok\n\nSound effects\nfreesound.org\n\nEverything else\nKristj\xE1n,
+    Marteinn, Nikul\xE1s og Teitur"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a2868d37c6531e249977ddb649f37416, type: 2}
   m_sharedMaterial: {fileID: -899470900601412372, guid: a2868d37c6531e249977ddb649f37416, type: 2}
@@ -341,8 +342,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 34
-  m_fontSizeBase: 34
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
