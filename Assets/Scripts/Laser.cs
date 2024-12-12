@@ -32,8 +32,11 @@ public class Laser : MonoBehaviour
             
             AudioManager.instance.PlayLaserSound();
             mainCamera.GetComponent<Shake>().LaserShake();
-            GetComponent<BoxCollider2D>().enabled = true;
             laserglow.gameObject.SetActive(true);
+       }
+       if (AudioManager.instance.currentBeat == (lastBeat +10)){
+            GetComponent<BoxCollider2D>().enabled = true;
+
        }
     }
     
