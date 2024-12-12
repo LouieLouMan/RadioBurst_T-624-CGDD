@@ -13,17 +13,19 @@ public class MainMenuCanvas : MonoBehaviour
     public float animationSpeed = 0.15f;
     public float scale = 10f;
     public float scaleFactor = 3f;
+    public AudioSource mainMenuSong;
     private Button[] buttons;
     private int i = 0;
     private float t = 0;
-    private AsyncOperation preloadScene;
+    private AsyncOperation preloadGame;
 
     void Start()
     {
         buttons = GetComponentsInChildren<Button>();
         EventSystem.current.SetSelectedGameObject(buttons[0].gameObject);
-        preloadScene = SceneManager.LoadSceneAsync(1);
-        preloadScene.allowSceneActivation = false;
+        preloadGame = SceneManager.LoadSceneAsync(1);
+        preloadGame.allowSceneActivation = false;
+        DontDestroyOnLoad(mainMenuSong);
     }
 
     void Update()
@@ -57,11 +59,15 @@ public class MainMenuCanvas : MonoBehaviour
         {
             if (EventSystem.current.currentSelectedGameObject == buttons[0].gameObject)
             {
-                StartCoroutine(AnimateCursorAndSelect());
+                StartCoroutine(SelectPlay());
+            }
+            else if (EventSystem.current.currentSelectedGameObject == buttons[1].gameObject)
+            {
+                StartCoroutine(SelectOther(2));
             } 
             else if (EventSystem.current.currentSelectedGameObject == buttons[2].gameObject)
             {
-                Application.Quit();
+                StartCoroutine(SelectOther(3));
             }
         }
     }
@@ -109,7 +115,7 @@ public class MainMenuCanvas : MonoBehaviour
         return (float) (20f + (Math.Cos(x) / scaleFactor)); 
     }
 
-    private IEnumerator AnimateCursorAndSelect()
+    private IEnumerator SelectPlay()
     {
         Debug.Log("hello from the coroutine");
         for (int i = 0; i < 12; i++)
@@ -135,7 +141,36 @@ public class MainMenuCanvas : MonoBehaviour
         }
 
         cursorTransform.anchoredPosition = targetPosition;
-        preloadScene.allowSceneActivation = true;
-        Debug.Log("Done!");
+        Destroy(mainMenuSong);
+        preloadGame.allowSceneActivation = true;
+    }
+
+    private IEnumerator SelectOther(int index)
+    {
+        Debug.Log("hello from the coroutine");
+        for (int i = 0; i < 12; i++)
+        {
+            cursor.enabled = !cursor.enabled;
+            yield return new WaitForSeconds(0.05f);
+        }
+        cursor.enabled = true;
+
+        RectTransform cursorTransform = cursor.rectTransform;
+        RectTransform buttonTransform = EventSystem.current.currentSelectedGameObject.GetComponent<RectTransform>();
+        Vector2 targetPosition = buttonTransform.anchoredPosition + new Vector2(50f, 0f);
+
+        float elapsedTime = 0f;
+        float duration = 0.3f;
+        Vector2 startPosition = cursorTransform.anchoredPosition;
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            cursorTransform.anchoredPosition = Vector2.Lerp(startPosition, targetPosition, elapsedTime / duration);
+            yield return null;
+        }
+
+        cursorTransform.anchoredPosition = targetPosition;
+        SceneManager.LoadScene(index);
     }
 }
