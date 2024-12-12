@@ -21659,7 +21659,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Text: {fileID: 1846599961}
   starParticles: {fileID: 1249811503}
-  spawnScore: 250
+  spawnScore: 20000
 --- !u!114 &1394777479
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22212,7 +22212,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Text: {fileID: 1846599961}
   starParticles: {fileID: 1721944950}
-  spawnScore: 100
+  spawnScore: 10000
 --- !u!114 &1507355947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22458,7 +22458,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Text: {fileID: 1846599961}
   starParticles: {fileID: 543359474}
-  spawnScore: 500
+  spawnScore: 30000
 --- !u!114 &1695592314
 MonoBehaviour:
   m_ObjectHideFlags: 0
