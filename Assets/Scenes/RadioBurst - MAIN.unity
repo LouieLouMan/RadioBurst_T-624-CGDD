@@ -38344,7 +38344,7 @@ MonoBehaviour:
   laserSFX: {fileID: 8300000, guid: c26ce5b754b434fd0abea03d4beaccf3, type: 3}
   bpm: 122
   spb: 0
-  inputTolerance: 0.15
+  inputTolerance: 0.18
   player: {fileID: 1707666452}
   mainCamera: {fileID: 0}
   currentBeat: -1
