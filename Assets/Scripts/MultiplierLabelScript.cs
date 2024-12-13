@@ -5,7 +5,7 @@ public class MultiplierLabelScript : MonoBehaviour
     public TMPro.TextMeshProUGUI scoreLabel;
 
     float multiplier;
-    float last_mult = 0f;
+    float last_mult = 1f;
 
     public ParticleSystem redFire;
     public ParticleSystem blueFire;

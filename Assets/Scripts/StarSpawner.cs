@@ -53,7 +53,7 @@ public class StarSpawner : MonoBehaviour
         //GET 10X
         if (multiplierCondition && !conditionMet)
         {
-            if (GameControllerScript.instance.multiplier == 100)
+            if (GameControllerScript.instance.gotTenX)
             {
                 conditionMet = true;
             }

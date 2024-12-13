@@ -7,10 +7,19 @@ public class GameControllerScript : MonoBehaviour
     public int multiplier = 10;
     public int hitCount = 0;
     public int beatMiss = 0;
+    public bool gotTenX = false;
     void Awake()
     {
         instance = this;
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 128; // <- waow
+    }
+
+    void Update()
+    {
+        if (multiplier == 100)
+        {
+            gotTenX = true;
+        }
     }
 }
