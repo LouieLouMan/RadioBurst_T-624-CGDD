@@ -44,7 +44,7 @@ public class AudioManager : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {   Debug.Log(currentBeat);
+    {
         if (Input.GetKeyDown(KeyCode.Space) && isPlaying == false){
             timer = 0;
             lastTimer = 0;

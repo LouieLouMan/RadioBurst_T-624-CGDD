@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class StarSpawner : MonoBehaviour
 {
-    public TextMeshProUGUI Text;
     RawImage sprite;
     Animator animator;
     GameObject myCamera;
