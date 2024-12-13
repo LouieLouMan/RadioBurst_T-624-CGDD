@@ -44,6 +44,9 @@ public class AudioManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("HIT COUNT: " + GameControllerScript.instance.hitCount + " BEAT HIT %: " + (396f - GameControllerScript.instance.beatMiss)/396f);
+        
+
         if (Input.GetKeyDown(KeyCode.Space) && isPlaying == false){
             timer = 0;
             lastTimer = 0;
@@ -99,6 +102,7 @@ public class AudioManager : MonoBehaviour
                 if (!movedOnBeat && graceCooldown > spb * 1.5f)
                 {
                     GameControllerScript.instance.multiplier = Mathf.Max(10, GameControllerScript.instance.multiplier - 2);
+                    GameControllerScript.instance.beatMiss += 1;
                 }
             }
 
@@ -125,7 +129,9 @@ public class AudioManager : MonoBehaviour
                     //mainCamera.GetComponent<Shake>().OffBeatShake();
                     player.GetComponent<PlayerShake>().OffBeatShake();
                     GameControllerScript.instance.multiplier = Mathf.Max(10, GameControllerScript.instance.multiplier - 10);
+                    GameControllerScript.instance.beatMiss += 1;
                     offBeatSource.PlayOneShot(offBeatNoise);
+                    
                 }
             }
 

@@ -79,6 +79,7 @@ public class PlayerController : MonoBehaviour
         playerSprite.enabled = false;
         
         GameControllerScript.instance.multiplier = 10;
+        GameControllerScript.instance.hitCount += 1;
 
         MuffleAudio();
         Invoke(nameof(ResetAudioEffects), muffledDuration);
