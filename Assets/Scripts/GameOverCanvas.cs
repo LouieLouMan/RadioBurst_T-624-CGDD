@@ -55,6 +55,10 @@ public class GameOverCanvas : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape)) AudioManager.instance.currentBeat = 1500;
+        if (Input.GetKey(KeyCode.L))
+        {
+            MainMenu();
+        }
         if (AudioManager.instance.isPlaying) return;
 
 
@@ -74,10 +78,6 @@ public class GameOverCanvas : MonoBehaviour
         }
 
         UpdateCursorPosition();
-        if (Input.GetKey(KeyCode.L))
-        {
-            MainMenu();
-        }
         if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
         {
             EventSystem.current.SetSelectedGameObject(GetNextSelection());
