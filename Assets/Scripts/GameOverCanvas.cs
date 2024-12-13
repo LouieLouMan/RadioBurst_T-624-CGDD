@@ -1,6 +1,10 @@
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
+using System;
+using System.Collections;
+using Unity.VisualScripting;
 public class GameOverCanvas : MonoBehaviour
 {
     public static GameOverCanvas instance;
@@ -10,6 +14,19 @@ public class GameOverCanvas : MonoBehaviour
     
     GameObject lastSelection;
     GameObject playingUI;
+    public RawImage cursor;
+    public AudioSource audioSource;
+    public RawImage rawImage;
+    public float animationSpeed = 0.15f;
+    public float scale = 10f;
+    public float scaleFactor = 3f;
+    public float offset = 20f;
+    public AudioClip hoverSoundSFX;
+    public AudioClip selectSFX;
+    private Button[] buttons;
+
+    private int i = 0;
+    private float t = 0;
 
     public int baseOpacity = 0;
 
@@ -19,12 +36,33 @@ public class GameOverCanvas : MonoBehaviour
     }
     void Start()
     {
-        youLostMenu = this.transform.GetChild(0).gameObject;
+        youLostMenu = transform.GetChild(0).gameObject;
         playingUI = GameObject.Find("GameUiCanvas");
+
+        buttons = new Button[2];
+        foreach (var btn in Resources.FindObjectsOfTypeAll(typeof(Button)))
+        {
+            buttons[0] = btn.name == "RetryButton" ? btn.GetComponent<Button>() : buttons[0];
+            buttons[1] = btn.name == "MainMenuButton" ? btn.GetComponent<Button>() : buttons[1];
+        }
+
+        buttons[0].onClick.AddListener(() => SceneManager.LoadScene(1));
+        buttons[1].onClick.AddListener(() => SceneManager.LoadScene(1));
+
+        cursor.rectTransform.anchoredPosition = new(buttons[0].GetComponent<RectTransform>().anchoredPosition.x - 120f, -217f);
     }
 
     void Update()
-    {   
+    {
+        if (Input.GetKeyDown(KeyCode.Escape)) AudioManager.instance.currentBeat = 1500;
+        if (AudioManager.instance.isPlaying) return;
+
+
+        t += Time.deltaTime;
+        if (t > 10 * Mathf.PI) t = 0;
+        float bounceScale = BounceFunction(t);
+        rawImage.transform.localScale = scale * bounceScale * Vector3.one;
+
 
         if(EventSystem.current.currentSelectedGameObject == null)
         {
@@ -34,10 +72,76 @@ public class GameOverCanvas : MonoBehaviour
         {
             lastSelection = EventSystem.current.currentSelectedGameObject;
         }
-        if (Input.GetKey(KeyCode.Escape))
+
+        UpdateCursorPosition();
+        if (Input.GetKey(KeyCode.L))
         {
-            PauseGame();
+            MainMenu();
         }
+        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            EventSystem.current.SetSelectedGameObject(GetNextSelection());
+            audioSource.PlayOneShot(hoverSoundSFX);
+        }
+        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            EventSystem.current.SetSelectedGameObject(GetPreviousSelection());
+            audioSource.PlayOneShot(hoverSoundSFX);
+        }
+        if (Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.Space))
+        {
+            if (EventSystem.current.currentSelectedGameObject == buttons[0].gameObject)
+            {
+                StartCoroutine(SelectScene(1));
+            }
+            else if (EventSystem.current.currentSelectedGameObject == buttons[1].gameObject)
+            {
+                StartCoroutine(SelectScene(0));
+            } 
+        }
+    }
+
+    private GameObject GetNextSelection()
+    {
+        i = (i + 1) % buttons.Length;
+        return buttons[i].gameObject;
+    }
+
+    private GameObject GetPreviousSelection()
+    {
+        i = i - 1 < 0 ? buttons.Length - 1 : i - 1;    
+        return buttons[i].gameObject;
+    }
+
+    private IEnumerator SelectScene(int index)
+    {
+        Debug.Log("hello from the coroutine");
+        audioSource.PlayOneShot(selectSFX);
+        
+        for (int i = 0; i < 12; i++)
+        {
+            cursor.enabled = !cursor.enabled;
+            yield return new WaitForSeconds(0.05f);
+        }
+        cursor.enabled = true;
+
+        RectTransform cursorTransform = cursor.rectTransform;
+        RectTransform buttonTransform = EventSystem.current.currentSelectedGameObject.GetComponent<RectTransform>();
+        Vector2 targetPosition = buttonTransform.anchoredPosition + new Vector2(1000f, 0f);
+
+        float elapsedTime = 0f;
+        float duration = 0.6f;
+        Vector2 startPosition = cursorTransform.anchoredPosition;
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            cursorTransform.anchoredPosition = Vector2.Lerp(startPosition, targetPosition, elapsedTime / duration);
+            yield return null;
+        }
+
+        cursorTransform.anchoredPosition = targetPosition;
+        SceneManager.LoadScene(index);
     }
 
     public void PauseGame()
@@ -75,6 +179,26 @@ public class GameOverCanvas : MonoBehaviour
     public void OnQuitButton ()
     {   
         Application.Quit();
+    }
+
+    private void UpdateCursorPosition()
+    {
+        if (EventSystem.current.currentSelectedGameObject != null)
+        {
+            RectTransform selectedButtonRect = EventSystem.current.currentSelectedGameObject.GetComponent<RectTransform>();
+            if (selectedButtonRect != null)
+            {
+                cursor.rectTransform.anchoredPosition = new Vector2(
+                    selectedButtonRect.anchoredPosition.x - 120f,
+                    -217f
+                );
+            }
+        }
+    }
+
+    private float BounceFunction(float x)
+    {
+        return (float) (offset + (Math.Cos(x) / scaleFactor)); 
     }
 
 }

@@ -20,13 +20,27 @@ public class MainMenuCanvas : MonoBehaviour
     private int i = 0;
     private float t = 0;
     private AsyncOperation preloadGame;
+    private RawImage assistModeToggle;
 
     void Start()
     {
+        if (!PlayerPrefs.HasKey("AssistMode"))
+        {
+            PlayerPrefs.SetInt("AssistMode", 0);
+            PlayerPrefs.Save();
+        }
+        else 
+        {
+            PlayerPrefs.SetInt("AssistMode", 0);
+            PlayerPrefs.Save();
+        }
+
         buttons = new Button[3];
         buttons[0] = GameObject.Find("PlayButton").GetComponent<Button>();
         buttons[1] = GameObject.Find("HowToPlayButton").GetComponent<Button>();
         buttons[2] = GameObject.Find("CreditsButton").GetComponent<Button>();
+        assistModeToggle = GameObject.Find("AssistModeToggle").GetComponent<RawImage>();
+        assistModeToggle.color = new(0f, 0f, 0f, 0f);
 
         buttons[0].onClick.AddListener(() => StartCoroutine(SelectPlay()));
         buttons[1].onClick.AddListener(() => StartCoroutine(SelectOther(2)));
@@ -90,6 +104,13 @@ public class MainMenuCanvas : MonoBehaviour
                 StartCoroutine(SelectOther(3));
             }
         }
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            assistModeToggle.color = new(1f, 1f, 1f, 1f);
+            PlayerPrefs.SetInt("AssistMode", PlayerPrefs.GetInt("AssistMode") == 1 ? 0 : 1);
+            PlayerPrefs.Save();
+            ChangeAssistModeColor();
+        }
     }
 
 
@@ -133,7 +154,6 @@ public class MainMenuCanvas : MonoBehaviour
 
     private IEnumerator SelectPlay()
     {
-        Debug.Log("hello from the coroutine");
         mainMenuSong.PlayOneShot(selectSFX);
 
         for (int i = 0; i < 12; i++)
@@ -192,5 +212,17 @@ public class MainMenuCanvas : MonoBehaviour
 
         cursorTransform.anchoredPosition = targetPosition;
         SceneManager.LoadScene(index);
+    }
+
+    private void ChangeAssistModeColor()
+    {
+        if (PlayerPrefs.GetInt("AssistMode") == 1)
+        {
+            assistModeToggle.color = new(0f, 0f, 1f, 0.5f);
+        }
+        else
+        {
+            assistModeToggle.color = new(0f, 0f, 0f, 0f);
+        }
     }
 }

@@ -25,7 +25,7 @@ public class AudioManager : MonoBehaviour
     private float graceCooldown;
     private int pulse = 0;
     public bool laserSoundPlaying = false;
-    public bool assistMode = false;
+    public bool assistMode;
     // Start is called before the first frame update
     
     void Awake()
@@ -40,6 +40,7 @@ public class AudioManager : MonoBehaviour
         GetComponent<AudioSource>().clip.LoadAudioData();
         mainCamera = Camera.main;
         graceCooldown = 0f;
+        assistMode = PlayerPrefs.GetInt("AssistMode", 0) == 1;
     }
 
     // Update is called once per frame
