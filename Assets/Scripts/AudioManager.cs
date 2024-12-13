@@ -44,9 +44,6 @@ public class AudioManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("HIT COUNT: " + GameControllerScript.instance.hitCount + " BEAT HIT %: " + (396f - GameControllerScript.instance.beatMiss)/396f);
-        
-
         if (Input.GetKeyDown(KeyCode.Space) && isPlaying == false){
             timer = 0;
             lastTimer = 0;

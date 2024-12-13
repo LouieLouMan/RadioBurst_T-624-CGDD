@@ -71,7 +71,7 @@ public class StarSpawner : MonoBehaviour
          //MISS > 95% BEATS
         if (missBeatCondition && conditionMet)
         {
-            if ((396f - GameControllerScript.instance.beatMiss)/396f < 0.95f)
+            if ((396f - GameControllerScript.instance.beatMiss)/396f < 0.85f)
             {
                 conditionMet = false;
             }
