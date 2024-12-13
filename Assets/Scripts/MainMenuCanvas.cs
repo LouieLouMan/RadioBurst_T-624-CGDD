@@ -23,7 +23,11 @@ public class MainMenuCanvas : MonoBehaviour
 
     void Start()
     {
-        buttons = GetComponentsInChildren<Button>();
+        buttons = new Button[3];
+        buttons[0] = GameObject.Find("PlayButton").GetComponent<Button>();
+        buttons[1] = GameObject.Find("HowToPlayButton").GetComponent<Button>();
+        buttons[2] = GameObject.Find("CreditsButton").GetComponent<Button>();
+
         buttons[0].onClick.AddListener(() => StartCoroutine(SelectPlay()));
         buttons[1].onClick.AddListener(() => StartCoroutine(SelectOther(2)));
         buttons[2].onClick.AddListener(() => StartCoroutine(SelectOther(3)));
