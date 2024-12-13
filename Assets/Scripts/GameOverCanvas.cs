@@ -92,11 +92,11 @@ public class GameOverCanvas : MonoBehaviour
         {
             if (EventSystem.current.currentSelectedGameObject == buttons[0].gameObject)
             {
-                StartCoroutine(SelectScene(1));
+                RetryGame();
             }
             else if (EventSystem.current.currentSelectedGameObject == buttons[1].gameObject)
             {
-                StartCoroutine(SelectScene(0));
+                MainMenu();
             } 
         }
     }
@@ -111,37 +111,6 @@ public class GameOverCanvas : MonoBehaviour
     {
         i = i - 1 < 0 ? buttons.Length - 1 : i - 1;    
         return buttons[i].gameObject;
-    }
-
-    private IEnumerator SelectScene(int index)
-    {
-        Debug.Log("hello from the coroutine");
-        audioSource.PlayOneShot(selectSFX);
-        
-        for (int i = 0; i < 12; i++)
-        {
-            cursor.enabled = !cursor.enabled;
-            yield return new WaitForSeconds(0.05f);
-        }
-        cursor.enabled = true;
-
-        RectTransform cursorTransform = cursor.rectTransform;
-        RectTransform buttonTransform = EventSystem.current.currentSelectedGameObject.GetComponent<RectTransform>();
-        Vector2 targetPosition = buttonTransform.anchoredPosition + new Vector2(1000f, 0f);
-
-        float elapsedTime = 0f;
-        float duration = 0.6f;
-        Vector2 startPosition = cursorTransform.anchoredPosition;
-
-        while (elapsedTime < duration)
-        {
-            elapsedTime += Time.deltaTime;
-            cursorTransform.anchoredPosition = Vector2.Lerp(startPosition, targetPosition, elapsedTime / duration);
-            yield return null;
-        }
-
-        cursorTransform.anchoredPosition = targetPosition;
-        SceneManager.LoadScene(index);
     }
 
     public void PauseGame()
@@ -168,6 +137,7 @@ public class GameOverCanvas : MonoBehaviour
     {
         ResumeGame();
         Scene scene = SceneManager.GetActiveScene();
+        Debug.Log("Trying");
         SceneManager.LoadScene(scene.name, LoadSceneMode.Single);
     }
     public void MainMenu ()
