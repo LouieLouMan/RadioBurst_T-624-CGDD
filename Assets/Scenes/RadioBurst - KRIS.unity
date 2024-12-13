@@ -1242,7 +1242,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: GET HIT < 15
+  m_text: GET HIT < 10
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 179e033be9cd3b847831cc3ff181cc9f, type: 2}
   m_sharedMaterial: {fileID: -1938687934028468703, guid: 179e033be9cd3b847831cc3ff181cc9f, type: 2}
@@ -1545,7 +1545,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ON BEAT > 85%
+  m_text: ON BEAT > 90%
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 179e033be9cd3b847831cc3ff181cc9f, type: 2}
   m_sharedMaterial: {fileID: -1938687934028468703, guid: 179e033be9cd3b847831cc3ff181cc9f, type: 2}
@@ -38757,6 +38757,7 @@ MonoBehaviour:
   isPlaying: 0
   pressSpaceToStartTxt: {fileID: 454474510}
   laserSoundPlaying: 0
+  assistMode: 0
 --- !u!4 &2123659504
 Transform:
   m_ObjectHideFlags: 0

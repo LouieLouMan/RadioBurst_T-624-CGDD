@@ -37,6 +37,11 @@ public class StarSpawner : MonoBehaviour
         {
             conditionMet = true;
         }
+
+        if (missBeatCondition)
+        {
+            playerStatText.text = "GOT: " + (((396f - GameControllerScript.instance.beatMiss)/396f)*100f).ToString("F1") + "%";
+        }
         
         sprite.enabled = false;
     }
@@ -59,7 +64,7 @@ public class StarSpawner : MonoBehaviour
         if (getHitCondition && conditionMet)
         {
             playerStatText.text = "GOT HIT " + GameControllerScript.instance.hitCount.ToString() + " TIMES";
-            if (GameControllerScript.instance.hitCount > 15)
+            if (GameControllerScript.instance.hitCount > 10)
             {
                 conditionMet = false;
             }
@@ -68,8 +73,7 @@ public class StarSpawner : MonoBehaviour
          //MISS > 95% BEATS
         if (missBeatCondition && conditionMet)
         {
-            playerStatText.text = "GOT: " + (((396f - GameControllerScript.instance.beatMiss)/396f)*100f).ToString("F1") + "%";
-            if ((396f - GameControllerScript.instance.beatMiss)/396f < 0.85f)
+            if ((396f - GameControllerScript.instance.beatMiss)/396f < 0.90f)
             {
                 conditionMet = false;
             }
