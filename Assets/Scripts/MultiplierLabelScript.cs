@@ -35,7 +35,7 @@ public class MultiplierLabelScript : MonoBehaviour
         multiplier = GameControllerScript.instance.multiplier;
         multiplier = multiplier * 0.1f;
         if (multiplier != last_mult) {
-            if (multiplier == 0)
+            if (multiplier == 1)
             {
                 _animator.StopPlayback();
                 _animator.SetTrigger("multireset");

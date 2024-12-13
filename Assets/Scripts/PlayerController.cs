@@ -78,7 +78,7 @@ public class PlayerController : MonoBehaviour
         playerCollider.enabled = false;
         playerSprite.enabled = false;
         
-        GameControllerScript.instance.multiplier = 0;
+        GameControllerScript.instance.multiplier = 10;
 
         MuffleAudio();
         Invoke(nameof(ResetAudioEffects), muffledDuration);
@@ -106,7 +106,10 @@ public class PlayerController : MonoBehaviour
 
     public void MovePlayer()
     {
-        GameControllerScript.instance.multiplier += 1;
+        if (GameControllerScript.instance.multiplier < 100)
+        {
+            GameControllerScript.instance.multiplier += 1;
+        }
         GameControllerScript.instance.score += (int)(10 * (GameControllerScript.instance.multiplier * 0.1f));
         scoreAnimator.SetTrigger("scorePop");
         Vector2 pointDirection = createVector();

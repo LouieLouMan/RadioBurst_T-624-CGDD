@@ -98,7 +98,7 @@ public class AudioManager : MonoBehaviour
 
                 if (!movedOnBeat && graceCooldown > spb * 1.5f)
                 {
-                    GameControllerScript.instance.multiplier = Mathf.Max(0, GameControllerScript.instance.multiplier - 2);
+                    GameControllerScript.instance.multiplier = Mathf.Max(10, GameControllerScript.instance.multiplier - 2);
                 }
             }
 
@@ -122,10 +122,9 @@ public class AudioManager : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("Input was off-beat!");
                     //mainCamera.GetComponent<Shake>().OffBeatShake();
                     player.GetComponent<PlayerShake>().OffBeatShake();
-                    
+                    GameControllerScript.instance.multiplier = Mathf.Max(10, GameControllerScript.instance.multiplier - 10);
                     offBeatSource.PlayOneShot(offBeatNoise);
                 }
             }
