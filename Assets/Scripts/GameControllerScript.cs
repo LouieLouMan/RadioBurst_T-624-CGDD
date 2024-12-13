@@ -7,6 +7,7 @@ public class GameControllerScript : MonoBehaviour
     public int multiplier = 10;
     public int hitCount = 0;
     public int beatMiss = 0;
+    public int maxMultiplier = 0;
     public bool gotTenX = false;
     void Awake()
     {
@@ -17,6 +18,11 @@ public class GameControllerScript : MonoBehaviour
 
     void Update()
     {
+        if (multiplier > maxMultiplier)
+        {
+            maxMultiplier = multiplier;
+        }
+
         if (multiplier == 100)
         {
             gotTenX = true;
