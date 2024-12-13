@@ -13,14 +13,14 @@ public class StarSpawner : MonoBehaviour
     public AudioSource starSoundSource;
     public AudioClip starLandSFX;
     public ParticleSystem starParticles;
-    int scoreTick;
-    public int spawnScore;
-    string lastText = "";
     bool spawned = false;
     bool played = false;
     public bool multiplierCondition = false;
     public bool missBeatCondition = false;
     public bool getHitCondition = false;
+
+    public TextMeshProUGUI playerStatText;
+
     bool conditionMet = false;
     // Start is called before the first frame update
 
@@ -38,6 +38,11 @@ public class StarSpawner : MonoBehaviour
         {
             conditionMet = true;
         }
+
+        if (missBeatCondition)
+        {
+            playerStatText.text = "GOT: " + (((396f - GameControllerScript.instance.beatMiss)/396f)*100f).ToString("F1") + "%";
+        }
         
         sprite.enabled = false;
     }
@@ -45,15 +50,11 @@ public class StarSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Text.text != lastText)
-        {
-            scoreTick = int.Parse(Text.text, System.Globalization.NumberStyles.AllowThousands);
-            lastText = Text.text;
-        }
         
         //GET 10X
         if (multiplierCondition && !conditionMet)
         {
+            playerStatText.text = "GOT: " + (GameControllerScript.instance.maxMultiplier * 0.1f).ToString("F1") + "X";
             if (GameControllerScript.instance.gotTenX)
             {
                 conditionMet = true;
@@ -63,7 +64,8 @@ public class StarSpawner : MonoBehaviour
         //GET HIT > 15
         if (getHitCondition && conditionMet)
         {
-            if (GameControllerScript.instance.hitCount > 15)
+            playerStatText.text = "GOT HIT " + GameControllerScript.instance.hitCount.ToString() + " TIMES";
+            if (GameControllerScript.instance.hitCount > 10)
             {
                 conditionMet = false;
             }
@@ -72,7 +74,7 @@ public class StarSpawner : MonoBehaviour
          //MISS > 95% BEATS
         if (missBeatCondition && conditionMet)
         {
-            if ((396f - GameControllerScript.instance.beatMiss)/396f < 0.85f)
+            if ((396f - GameControllerScript.instance.beatMiss)/396f < 0.90f)
             {
                 conditionMet = false;
             }
