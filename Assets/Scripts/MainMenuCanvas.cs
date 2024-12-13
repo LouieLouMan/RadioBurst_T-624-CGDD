@@ -14,6 +14,8 @@ public class MainMenuCanvas : MonoBehaviour
     public float scale = 10f;
     public float scaleFactor = 3f;
     private AudioSource mainMenuSong;
+    public AudioClip hoverSoundSFX;
+    public AudioClip selectSFX;
     private Button[] buttons;
     private int i = 0;
     private float t = 0;
@@ -41,6 +43,7 @@ public class MainMenuCanvas : MonoBehaviour
 
     void Update()
     {   
+
         t += Time.deltaTime;
         if (t > 10 * Mathf.PI) t = 0;
         
@@ -61,10 +64,12 @@ public class MainMenuCanvas : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
         {
             EventSystem.current.SetSelectedGameObject(GetNextSelection());
+            mainMenuSong.PlayOneShot(hoverSoundSFX);
         }
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
         {
             EventSystem.current.SetSelectedGameObject(GetPreviousSelection());
+            mainMenuSong.PlayOneShot(hoverSoundSFX);
         }
         if (Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.Space))
         {
@@ -125,6 +130,8 @@ public class MainMenuCanvas : MonoBehaviour
     private IEnumerator SelectPlay()
     {
         Debug.Log("hello from the coroutine");
+        mainMenuSong.PlayOneShot(selectSFX);
+
         for (int i = 0; i < 12; i++)
         {
             cursor.enabled = !cursor.enabled;
@@ -134,10 +141,10 @@ public class MainMenuCanvas : MonoBehaviour
 
         RectTransform cursorTransform = cursor.rectTransform;
         RectTransform buttonTransform = EventSystem.current.currentSelectedGameObject.GetComponent<RectTransform>();
-        Vector2 targetPosition = buttonTransform.anchoredPosition + new Vector2(50f, 0f);
+        Vector2 targetPosition = buttonTransform.anchoredPosition + new Vector2(1000f, 0f);
 
         float elapsedTime = 0f;
-        float duration = 0.3f;
+        float duration = 0.6f;
         Vector2 startPosition = cursorTransform.anchoredPosition;
 
         while (elapsedTime < duration)
@@ -155,6 +162,8 @@ public class MainMenuCanvas : MonoBehaviour
     private IEnumerator SelectOther(int index)
     {
         Debug.Log("hello from the coroutine");
+        mainMenuSong.PlayOneShot(selectSFX);
+        
         for (int i = 0; i < 12; i++)
         {
             cursor.enabled = !cursor.enabled;
