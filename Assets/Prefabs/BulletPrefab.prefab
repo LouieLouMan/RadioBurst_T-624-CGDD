@@ -206,7 +206,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.085
+  m_Radius: 0.05
 --- !u!114 &-4692382961539492918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -222,6 +222,8 @@ MonoBehaviour:
   speed: 2.5
   body: {fileID: -3485175433926391709}
   direction: {x: 0, y: -1}
+  elapsedTime: 0
+  timeBeforeDestroy: 1
 --- !u!50 &-3485175433926391709
 Rigidbody2D:
   serializedVersion: 4
