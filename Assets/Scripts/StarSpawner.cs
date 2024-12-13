@@ -10,8 +10,9 @@ public class StarSpawner : MonoBehaviour
     RawImage sprite;
     Animator animator;
     GameObject myCamera;
+    public AudioSource starSoundSource;
+    public AudioClip starLandSFX;
     public ParticleSystem starParticles;
-    
     bool spawned = false;
     bool played = false;
     public bool multiplierCondition = false;
@@ -95,6 +96,7 @@ public class StarSpawner : MonoBehaviour
                 played = false;
                 myCamera.GetComponent<Shake>().PlayerHitShake();
                 StartCoroutine(PlayParticles());
+                starSoundSource.PlayOneShot(starLandSFX);
             }
         }
 

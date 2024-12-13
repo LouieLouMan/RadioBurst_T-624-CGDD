@@ -26836,6 +26836,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Text: {fileID: 1846599961}
+  starSoundSource: {fileID: 2123659502}
+  starLandSFX: {fileID: 8300000, guid: cd344ad8807d44a8480a34b8ddb956e2, type: 3}
   starParticles: {fileID: 1249811503}
   spawnScore: 20000
   multiplierCondition: 0
@@ -27258,6 +27260,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Text: {fileID: 1846599961}
+  starSoundSource: {fileID: 2123659502}
+  starLandSFX: {fileID: 8300000, guid: cd344ad8807d44a8480a34b8ddb956e2, type: 3}
   starParticles: {fileID: 1721944950}
   spawnScore: 10000
   multiplierCondition: 1
@@ -27507,6 +27511,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Text: {fileID: 1846599961}
+  starSoundSource: {fileID: 2123659502}
+  starLandSFX: {fileID: 8300000, guid: cd344ad8807d44a8480a34b8ddb956e2, type: 3}
   starParticles: {fileID: 543359474}
   spawnScore: 30000
   multiplierCondition: 0
