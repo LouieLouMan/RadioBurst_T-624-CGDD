@@ -17,6 +17,10 @@ public class StarSpawner : MonoBehaviour
     string lastText = "";
     bool spawned = false;
     bool played = false;
+    public bool multiplierCondition = false;
+    public bool missBeatCondition = false;
+    public bool getHitCondition = false;
+    bool conditionMet = false;
     // Start is called before the first frame update
 
     void Awake()
@@ -28,6 +32,11 @@ public class StarSpawner : MonoBehaviour
         sprite = GetComponent<RawImage>();
         animator = GetComponent<Animator>();
         myCamera = GameObject.Find("Main Camera");
+
+        if (getHitCondition || missBeatCondition)
+        {
+            conditionMet = true;
+        }
         
         sprite.enabled = false;
     }
@@ -41,7 +50,35 @@ public class StarSpawner : MonoBehaviour
             lastText = Text.text;
         }
         
-        if (scoreTick >= spawnScore)
+        //GET 10X
+        if (multiplierCondition && !conditionMet)
+        {
+            if (GameControllerScript.instance.multiplier == 100)
+            {
+                conditionMet = true;
+            }
+        }
+
+        //GET HIT > 15
+        if (getHitCondition && conditionMet)
+        {
+            if (GameControllerScript.instance.hitCount > 15)
+            {
+                conditionMet = false;
+            }
+        }
+
+         //MISS > 95% BEATS
+        if (missBeatCondition && conditionMet)
+        {
+            if ((396f - GameControllerScript.instance.beatMiss)/396f < 0.85f)
+            {
+                conditionMet = false;
+            }
+        }
+
+
+        if (conditionMet)
         {
             if (!spawned)
             {
