@@ -173,10 +173,10 @@ public class MainMenuCanvas : MonoBehaviour
 
         RectTransform cursorTransform = cursor.rectTransform;
         RectTransform buttonTransform = EventSystem.current.currentSelectedGameObject.GetComponent<RectTransform>();
-        Vector2 targetPosition = buttonTransform.anchoredPosition + new Vector2(50f, 0f);
+        Vector2 targetPosition = buttonTransform.anchoredPosition + new Vector2(1000f, 0f);
 
         float elapsedTime = 0f;
-        float duration = 0.3f;
+        float duration = 0.6f;
         Vector2 startPosition = cursorTransform.anchoredPosition;
 
         while (elapsedTime < duration)
