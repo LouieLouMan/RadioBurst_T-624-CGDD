@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: a0da55beba436534380bd9d5bc1a629f
   - enabled: 1
-    path: Assets/Scenes/MainMenu -Sound Juice.unity
+    path: Assets/Scenes/MainMenu.unity
     guid: 5a2ca8c2ca84e4b14a08b5933d3383e1
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
