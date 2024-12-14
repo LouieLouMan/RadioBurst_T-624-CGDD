@@ -5297,7 +5297,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Controls:
 
-    WASD or arrow keys to move:
+    WASD or arrow keys to move
 
     W - UP
 
@@ -5306,7 +5306,10 @@ MonoBehaviour:
     S
     - DOWN
 
-    D - RIGHT'
+    D - RIGHT
+
+
+    Space or Enter to confirm'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a2868d37c6531e249977ddb649f37416, type: 2}
   m_sharedMaterial: {fileID: -899470900601412372, guid: a2868d37c6531e249977ddb649f37416, type: 2}
