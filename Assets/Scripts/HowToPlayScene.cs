@@ -5,7 +5,7 @@ public class HowToPlayScene : MonoBehaviour
 {
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.L))
         {
             SceneManager.LoadScene(0);
         }
