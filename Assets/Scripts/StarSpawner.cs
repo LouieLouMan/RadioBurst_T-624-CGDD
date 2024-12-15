@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using Unity.Mathematics;
 
 public class StarSpawner : MonoBehaviour
 {
@@ -40,7 +41,7 @@ public class StarSpawner : MonoBehaviour
 
         if (missBeatCondition)
         {
-            playerStatText.text = "GOT: " + (((396f - GameControllerScript.instance.beatMiss)/396f)*100f).ToString("F1") + "%";
+            playerStatText.text = "GOT: " + (Mathf.Min(((394f - GameControllerScript.instance.beatMiss)/394f)*100f,100f).ToString("F1")) + "%";
         }
         
         sprite.enabled = false;
