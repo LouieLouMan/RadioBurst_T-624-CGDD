@@ -54,7 +54,6 @@ public class GameOverCanvas : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) AudioManager.instance.currentBeat = 1500;
         if (Input.GetKey(KeyCode.L))
         {
             MainMenu();
