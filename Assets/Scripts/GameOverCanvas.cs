@@ -58,7 +58,7 @@ public class GameOverCanvas : MonoBehaviour
         {
             MainMenu();
         }
-        if (AudioManager.instance.isPlaying) return;
+        if (AudioManager.instance.isPlaying || AudioManager.instance.currentBeat < 1000) return;
 
 
         t += Time.deltaTime;
