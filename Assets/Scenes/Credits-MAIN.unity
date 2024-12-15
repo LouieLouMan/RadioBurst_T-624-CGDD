@@ -179,7 +179,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Developers:\n\tKristj\xE1n Orri Leifsson\n\tMarteinn Logi J\xF3hannsson\n\tNikul\xE1s
+  m_text: "Fonts:\n\t\"Abstract\" by Fonts for flash\n\t\"Chakra Petch\" by Cadson
+    Demak\n\nDevelopers:\n\tKristj\xE1n Orri Leifsson\n\tMarteinn Logi J\xF3hannsson\n\tNikul\xE1s
     Anthony Swain\n\tTeitur Hr\xF3lfsson\n\nOur Wonderful Teachers:\n\tSteinger\xF0ur
     L\xF3a Gunnarsd\xF3ttir\n\tJonatan \"Joon\" van Hove\n\tDarri Arnarson"
   m_isRightToLeft: 0
@@ -208,8 +209,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 26
-  m_fontSizeBase: 26
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -450,8 +451,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Song for level 1:\n\t\"Bok Globule\"\n\tby Elvinas Plok\n\nMenu song:\n\t\"Thorne\u2013\u017Bytkow
-    Object\"\n\tby Elvinas Plok\n\nSound effects:\n\tNikul\xE1s Anthony Swain\n\tfreesound.org\n\nPress
-    L to return."
+    Object\"\n\tby Elvinas Plok\n\nSound effects:\n\tNikul\xE1s Anthony Swain\n\t\"Explosion
+    3\" by pumodi\n\nPress L to return."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a2868d37c6531e249977ddb649f37416, type: 2}
   m_sharedMaterial: {fileID: -899470900601412372, guid: a2868d37c6531e249977ddb649f37416, type: 2}
@@ -478,8 +479,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 26
-  m_fontSizeBase: 26
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
