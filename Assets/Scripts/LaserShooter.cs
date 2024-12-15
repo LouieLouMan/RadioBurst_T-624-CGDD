@@ -112,6 +112,9 @@ public class LaserShooter : MonoBehaviour
         var x = bulletShot.GetComponent<Bullet>();
         x.speed = speed;
         bulletShot.GetComponent<Bullet>().direction = Quaternion.Euler(0f,0f,degrees) * x.direction * x.speed;
+        if (bulletShot)
+        {
         Destroy(bulletShot, 15);
+        }
     }
 }
