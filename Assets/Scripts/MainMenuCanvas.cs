@@ -20,7 +20,8 @@ public class MainMenuCanvas : MonoBehaviour
     private int i = 0;
     private float t = 0;
     private AsyncOperation preloadGame;
-    private RawImage assistModeToggle;
+    public RawImage assistModeToggle;
+    
 
     void Start()
     {
@@ -39,8 +40,7 @@ public class MainMenuCanvas : MonoBehaviour
         buttons[0] = GameObject.Find("PlayButton").GetComponent<Button>();
         buttons[1] = GameObject.Find("HowToPlayButton").GetComponent<Button>();
         buttons[2] = GameObject.Find("CreditsButton").GetComponent<Button>();
-        assistModeToggle = GameObject.Find("AssistModeToggle").GetComponent<RawImage>();
-        assistModeToggle.color = new(0f, 0f, 0f, 0f);
+        assistModeToggle.enabled = false;
 
         buttons[0].onClick.AddListener(() => StartCoroutine(SelectPlay()));
         buttons[1].onClick.AddListener(() => StartCoroutine(SelectOther(2)));
@@ -218,11 +218,11 @@ public class MainMenuCanvas : MonoBehaviour
     {
         if (PlayerPrefs.GetInt("AssistMode") == 1)
         {
-            assistModeToggle.color = new(0f, 0f, 1f, 0.5f);
+            assistModeToggle.enabled = true;
         }
         else
         {
-            assistModeToggle.color = new(0f, 0f, 0f, 0f);
+            assistModeToggle.enabled = false;
         }
     }
 }
