@@ -1,4 +1,4 @@
 # RadioBurst_T-624-CGDD
 
-Our game can be played at
-[link](https://teturu.itch.io/radio-burst)
+There is no downloading required, just click this itch.io link and run the game in your preferred browser:
+[link](https://teturu.itch.io/radio-burst).
