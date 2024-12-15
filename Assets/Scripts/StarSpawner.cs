@@ -41,7 +41,7 @@ public class StarSpawner : MonoBehaviour
 
         if (missBeatCondition)
         {
-            playerStatText.text = "GOT: " + (Mathf.Min(((394f - GameControllerScript.instance.beatMiss)/394f)*100f,100f).ToString("F1")) + "%";
+            playerStatText.text = "GOT: " + (Mathf.Max(((396f - GameControllerScript.instance.beatMiss)/395f)*100f,0f).ToString("F1")) + "%";
         }
         
         sprite.enabled = false;
