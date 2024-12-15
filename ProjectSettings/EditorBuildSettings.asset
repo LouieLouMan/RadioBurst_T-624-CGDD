@@ -5,7 +5,28 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 0
+    path: Assets/Scenes/MainMenu.unity
+    guid: a0da55beba436534380bd9d5bc1a629f
+  - enabled: 0
+    path: Assets/Scenes/MainMenu.unity
+    guid: a0da55beba436534380bd9d5bc1a629f
   - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 5a2ca8c2ca84e4b14a08b5933d3383e1
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 0
+    path: Assets/Scenes/stis.unity
+    guid: 3c5060ae08f914936b2eceb1b277a8c4
+  - enabled: 1
+    path: Assets/Scenes/RadioBurst - MAIN.unity
+    guid: 1544301a61a805c46abd71c480405372
+  - enabled: 1
+    path: Assets/Scenes/HowToPlay-MAIN.unity
+    guid: feac48b1d1c373b489f2e434b86f3db0
+  - enabled: 1
+    path: Assets/Scenes/Credits-MAIN.unity
+    guid: e14ca00288c8fe64da838531156cf7a0
   m_configObjects: {}
