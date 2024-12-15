@@ -451,7 +451,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Song for level 1:\n\t\"Bok Globule\"\n\tby Elvinas Plok\n\nMenu song:\n\t\"Thorne\u2013\u017Bytkow
     Object\"\n\tby Elvinas Plok\n\nSound effects:\n\tNikul\xE1s Anthony Swain\n\tfreesound.org\n\nPress
-    L to escape"
+    L to return."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a2868d37c6531e249977ddb649f37416, type: 2}
   m_sharedMaterial: {fileID: -899470900601412372, guid: a2868d37c6531e249977ddb649f37416, type: 2}
